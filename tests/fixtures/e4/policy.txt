@@ -1,0 +1,27 @@
+Coletamos nome e e-mail dos clientes.
+
+Coletamos seu e-mail para enviar recibos de compra.
+
+Compartilhamos dados de compra com processadores de pagamento.
+
+Compartilhamos dados de compra com processadores de pagamento para processar pagamentos.
+
+Para cancelar mensagens de marketing, clique no link de descadastro ao final de cada mensagem.
+
+Para revogar o consentimento de marketing, abra Conta > Privacidade > Consentimentos no aplicativo.
+
+Para solicitar a exclusão dos seus dados, escreva para privacidade@exemplo.com.
+
+Respondemos às solicitações de exclusão em até 10 dias corridos após o recebimento do pedido.
+
+Guardamos registros de acesso por 180 dias após cada acesso.
+
+Eliminamos os registros de acesso ao fim de 180 dias contados de cada acesso.
+
+Usamos TLS para proteger os dados pessoais durante a transmissão.
+
+Funcionários acessam os registros de clientes somente após autenticação de múltiplos fatores.
+
+Avisamos os titulares sobre alterações desta política por e-mail.
+
+Avisaremos sobre alterações desta política 30 dias antes de sua entrada em vigor.

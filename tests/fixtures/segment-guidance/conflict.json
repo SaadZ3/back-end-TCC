@@ -1,0 +1,1986 @@
+{
+  "schema_version": 2,
+  "versions": {
+    "model": "synthetic-labels-not-model-inference",
+    "preprocessing": "synthetic-fixture",
+    "scoring": "governance-rules-v2-dev2:535296f344b06c80c3286478034ebb7b122a9eb85114c116d0b2be5db7a8e837",
+    "recommendations": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d"
+  },
+  "result": {
+    "document_scope": "full_document",
+    "source": {
+      "filename": "synthetic-e4.txt",
+      "format": "txt",
+      "byte_size": 36,
+      "sha256": "fe151cf4908969125100753a064cad13dc0b8eaca7815d6b8b5f1961ecf78a2e"
+    },
+    "preprocessing": {
+      "version": "synthetic-fixture-not-inference",
+      "max_length": 512,
+      "tokenizer_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "extraction": {
+      "status": "ok",
+      "warnings": [],
+      "text": "Coletamos nome. Não coletamos nome.",
+      "page_count": null,
+      "pages": [
+        {
+          "page_number": null,
+          "char_start": 0,
+          "char_end": 35,
+          "status": "ok"
+        }
+      ]
+    },
+    "segments": [
+      {
+        "segment_id": "s0",
+        "text": "Coletamos nome. Não coletamos nome.",
+        "char_start": 0,
+        "char_end": 35,
+        "page_start": null,
+        "page_end": null,
+        "labels": [
+          "Other"
+        ],
+        "n_tokens": 20,
+        "probabilities": {
+          "First Party Collection/Use": 0.01,
+          "Third Party Sharing/Collection": 0.01,
+          "User Choice/Control": 0.01,
+          "User Access, Edit and Deletion": 0.01,
+          "Data Retention": 0.01,
+          "Data Security": 0.01,
+          "Policy Change": 0.01,
+          "Do Not Track": 0.01,
+          "International and Specific Audiences": 0.01,
+          "Other": 0.99
+        },
+        "truncated": false
+      }
+    ],
+    "evaluation": {
+      "schema_version": 2,
+      "policy_id": "fe151cf4908969125100753a064cad13dc0b8eaca7815d6b8b5f1961ecf78a2e",
+      "language": "pt",
+      "index": "documentary_information_quality",
+      "method_version": "documentary-quality-v2-draft1",
+      "score_scale": "ordinal_0_3",
+      "profile_id": "core-14-v1",
+      "profile_sha256": "6ff4722b7a4efd6fd31c3a1ae629a3c25e49ffd0e990268b227cb6ae45ba8c2c",
+      "validation_status": "not_human_validated",
+      "input_status": "complete_input",
+      "score_status": "blocked",
+      "score": null,
+      "score_blockers": [
+        "inconclusive_questions"
+      ],
+      "rules_version": "governance-rules-v2-dev2",
+      "rules_sha256": "535296f344b06c80c3286478034ebb7b122a9eb85114c116d0b2be5db7a8e837",
+      "predictions_sha256": "42414ff85689377ae0cf86a53cce39af9521c1b6c2c1abf07c06120591fa3751",
+      "fallback_enabled": true,
+      "dimensions": [
+        {
+          "id": "collection",
+          "title": "Coleta e uso",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "collection.data_types",
+              "dimension_id": "collection",
+              "title": "Tipos de dados coletados",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "collection_practice",
+                "identifiable_data_type"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 15,
+                      "quote": "Coletamos nome."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.data_types",
+                  "rule_version": "governance-rules-v2-dev2",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:7faec0d5f47075d723b582bc7d3a107762032bd9bc6874a74a69dcc1798b9345"
+                },
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 16,
+                      "end": 35,
+                      "quote": "Não coletamos nome."
+                    }
+                  ],
+                  "polarity": "negated",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.data_types",
+                  "rule_version": "governance-rules-v2-dev2",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:0a7b7b4f711111f05f86ccad72c35c172ad9376acbb4636b1111b640c27a1ec4"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:540504ebe7c3b65dd88b1d46530cd7faa56cb4d68bfc102c1f3463c9385a0e15"
+              ]
+            },
+            {
+              "id": "collection.purposes",
+              "dimension_id": "collection",
+              "title": "Relação entre dado e finalidade",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "collected_data_type",
+                "specific_purpose"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 15,
+                      "quote": "Coletamos nome."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.purposes",
+                  "rule_version": "governance-rules-v2-dev2",
+                  "rationale": "Informação pertinente; faltam: specific_purpose",
+                  "id": "evidence:b5ede3cb321d551c894b68823c95988e386db07665c55b3b40933ff77c1c71e5"
+                },
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 16,
+                      "end": 35,
+                      "quote": "Não coletamos nome."
+                    }
+                  ],
+                  "polarity": "negated",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.purposes",
+                  "rule_version": "governance-rules-v2-dev2",
+                  "rationale": "Informação pertinente; faltam: specific_purpose",
+                  "id": "evidence:34468636869aeaeb412437ab400a77a555251ddab4ceec3c27b5782bfdaaee6e"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:cfa47835e1c1478ec5c43f90c70f4eeb4e703e48cfe0b3971a973bdcfe0a9708"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sharing",
+          "title": "Compartilhamento",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "resolved",
+          "score": 0,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "sharing.recipients",
+              "dimension_id": "sharing",
+              "title": "Destinatários do compartilhamento",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "sharing.recipients",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "sharing_practice",
+                "identifiable_recipient"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:3c2245ab4168fca07e42ac83bea8312f08f38c17d0d2ca1c6e4fd411296d73c2"
+              ]
+            },
+            {
+              "id": "sharing.conditions",
+              "dimension_id": "sharing",
+              "title": "Condições do compartilhamento",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "sharing.conditions",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "identifiable_recipient",
+                "purpose_condition_or_prohibition"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:a7ccb74dd91a6877336b14051167efc5832277b36800f6063ff13b9790918546"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "choice",
+          "title": "Escolhas e controle",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "resolved",
+          "score": 0,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "choice.mechanism",
+              "dimension_id": "choice",
+              "title": "Procedimento para exercer uma escolha",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "choice.mechanism",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "affected_processing",
+                "locatable_procedure"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:9998e8b7b2832eadca012058c447567006b80bbf489d5edabce93f0ffd9553a9"
+              ]
+            },
+            {
+              "id": "choice.channel",
+              "dimension_id": "choice",
+              "title": "Canal localizável para escolhas",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "choice.channel",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "choice",
+                "locatable_channel"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:6cf803abd167bae310b243dafc075d87a369c2b0f36c32b3f888addd1c173067"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "access",
+          "title": "Direitos e solicitações",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "resolved",
+          "score": 0,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "access.channel",
+              "dimension_id": "access",
+              "title": "Canal de solicitação de direitos",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "access.channel",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "identified_request",
+                "locatable_channel"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:d13c2f47c471243611d4447d9f7c9a01883c131e179c30a7a4ee201db6fe5ede"
+              ]
+            },
+            {
+              "id": "access.response_time",
+              "dimension_id": "access",
+              "title": "Prazo de resposta e marco inicial",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "access.response_time",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "identified_request",
+                "response_duration_and_unit",
+                "start_event"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:f07a9e636ed7ac46e88ecb75163263598c35c737344b2555504f7175ec3c9eda"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Retenção",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "resolved",
+          "score": 0,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "retention.duration",
+              "dimension_id": "retention",
+              "title": "Duração ou evento de retenção",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "retention.duration",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "data_class",
+                "duration_or_event"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:1c01ffb7bef77f94aea3ad4bc1ca31997824e93783f395ecce6ab1f155d77307"
+              ]
+            },
+            {
+              "id": "retention.disposal",
+              "dimension_id": "retention",
+              "title": "Destinação ao final da retenção",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "retention.disposal",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "data_class",
+                "end_event",
+                "disposition"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:e2529088340752ae1918a2325a2e347673a6d7786c768937703663e719578d46"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security",
+          "title": "Segurança",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "resolved",
+          "score": 0,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "security.technical_measures",
+              "dimension_id": "security",
+              "title": "Medida técnica e contexto de proteção",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "security.technical_measures",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "specific_measure",
+                "data_or_protection_context"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:272a8b955c5b66b01fff7643513a7dd0e5bd7bc96ce376968c78893109eb5e33"
+              ]
+            },
+            {
+              "id": "security.access_controls",
+              "dimension_id": "security",
+              "title": "Controle de acesso, ator e recurso",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "security.access_controls",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "specific_access_control",
+                "actor",
+                "resource"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:258a44373add045e3a2e8429c67a4e77dfc383a8c546b7e460cc633f0a23e052"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Alterações da política",
+          "weight": 1,
+          "normalized_weight": 0.14285714285714285,
+          "status": "resolved",
+          "score": 0,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "changes.notice_channel",
+              "dimension_id": "changes",
+              "title": "Canal de aviso de mudanças",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "changes.notice_channel",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "policy_change",
+                "identified_notice_channel"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:fbc1910cc22ac29bd64e791d759681d30a5e04bf5744e2cfaa05a083b424e330"
+              ]
+            },
+            {
+              "id": "changes.notice_timing",
+              "dimension_id": "changes",
+              "title": "Momento do aviso de mudanças",
+              "status": "not_detected",
+              "value": 0.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "changes.notice_timing",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+              "found_elements": [],
+              "missing_elements": [
+                "policy_change_notice",
+                "timing_and_event"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:bcce02dde23f336b8e6e0cd57690416272bf9be3d2747c975f30c6771c5f7b90"
+              ]
+            }
+          ]
+        }
+      ],
+      "findings": [
+        {
+          "id": "finding:540504ebe7c3b65dd88b1d46530cd7faa56cb4d68bfc102c1f3463c9385a0e15",
+          "dimension_id": "collection",
+          "question_id": "collection.data_types",
+          "rule_id": "collection.data_types",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "contradiction",
+          "title": "Tipos de dados coletados",
+          "rationale": "Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "priority": "high",
+          "priority_reason": "Esclarecer declaração ou entrada impeditiva.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 15,
+                  "quote": "Coletamos nome."
+                }
+              ],
+              "polarity": "affirmed",
+              "detection_source": "rule_only",
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Relação contextual detectada.",
+              "id": "evidence:7faec0d5f47075d723b582bc7d3a107762032bd9bc6874a74a69dcc1798b9345"
+            },
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 16,
+                  "end": 35,
+                  "quote": "Não coletamos nome."
+                }
+              ],
+              "polarity": "negated",
+              "detection_source": "rule_only",
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Relação contextual detectada.",
+              "id": "evidence:0a7b7b4f711111f05f86ccad72c35c172ad9376acbb4636b1111b640c27a1ec4"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-3b7151aece4ef0ff8ea5e802"
+          ]
+        },
+        {
+          "id": "finding:cfa47835e1c1478ec5c43f90c70f4eeb4e703e48cfe0b3971a973bdcfe0a9708",
+          "dimension_id": "collection",
+          "question_id": "collection.purposes",
+          "rule_id": "collection.purposes",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "contradiction",
+          "title": "Relação entre dado e finalidade",
+          "rationale": "Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "priority": "high",
+          "priority_reason": "Esclarecer declaração ou entrada impeditiva.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 15,
+                  "quote": "Coletamos nome."
+                }
+              ],
+              "polarity": "affirmed",
+              "detection_source": "rule_only",
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Informação pertinente; faltam: specific_purpose",
+              "id": "evidence:b5ede3cb321d551c894b68823c95988e386db07665c55b3b40933ff77c1c71e5"
+            },
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 16,
+                  "end": 35,
+                  "quote": "Não coletamos nome."
+                }
+              ],
+              "polarity": "negated",
+              "detection_source": "rule_only",
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v2-dev2",
+              "rationale": "Informação pertinente; faltam: specific_purpose",
+              "id": "evidence:34468636869aeaeb412437ab400a77a555251ddab4ceec3c27b5782bfdaaee6e"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-1f19728d0fa620d377a8b03a"
+          ]
+        },
+        {
+          "id": "finding:3c2245ab4168fca07e42ac83bea8312f08f38c17d0d2ca1c6e4fd411296d73c2",
+          "dimension_id": "sharing",
+          "question_id": "sharing.recipients",
+          "rule_id": "sharing.recipients",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Destinatários do compartilhamento",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-fec256a0d0685bbba78bb8eb"
+          ]
+        },
+        {
+          "id": "finding:a7ccb74dd91a6877336b14051167efc5832277b36800f6063ff13b9790918546",
+          "dimension_id": "sharing",
+          "question_id": "sharing.conditions",
+          "rule_id": "sharing.conditions",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Condições do compartilhamento",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-182a8a697bf596cb92970a9a"
+          ]
+        },
+        {
+          "id": "finding:9998e8b7b2832eadca012058c447567006b80bbf489d5edabce93f0ffd9553a9",
+          "dimension_id": "choice",
+          "question_id": "choice.mechanism",
+          "rule_id": "choice.mechanism",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Procedimento para exercer uma escolha",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-a252ad5c1edd19430f5f14c7"
+          ]
+        },
+        {
+          "id": "finding:6cf803abd167bae310b243dafc075d87a369c2b0f36c32b3f888addd1c173067",
+          "dimension_id": "choice",
+          "question_id": "choice.channel",
+          "rule_id": "choice.channel",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Canal localizável para escolhas",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-7023db747b15b45495e28e2c"
+          ]
+        },
+        {
+          "id": "finding:d13c2f47c471243611d4447d9f7c9a01883c131e179c30a7a4ee201db6fe5ede",
+          "dimension_id": "access",
+          "question_id": "access.channel",
+          "rule_id": "access.channel",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Canal de solicitação de direitos",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-5f38dfd88e9d089721e3aed4"
+          ]
+        },
+        {
+          "id": "finding:f07a9e636ed7ac46e88ecb75163263598c35c737344b2555504f7175ec3c9eda",
+          "dimension_id": "access",
+          "question_id": "access.response_time",
+          "rule_id": "access.response_time",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Prazo de resposta e marco inicial",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-56666eaef5bcf8d8b7501cf3"
+          ]
+        },
+        {
+          "id": "finding:1c01ffb7bef77f94aea3ad4bc1ca31997824e93783f395ecce6ab1f155d77307",
+          "dimension_id": "retention",
+          "question_id": "retention.duration",
+          "rule_id": "retention.duration",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Duração ou evento de retenção",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-fe40263aa300d0b0546c71b2"
+          ]
+        },
+        {
+          "id": "finding:e2529088340752ae1918a2325a2e347673a6d7786c768937703663e719578d46",
+          "dimension_id": "retention",
+          "question_id": "retention.disposal",
+          "rule_id": "retention.disposal",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Destinação ao final da retenção",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-f96778294b076b23edaea24a"
+          ]
+        },
+        {
+          "id": "finding:272a8b955c5b66b01fff7643513a7dd0e5bd7bc96ce376968c78893109eb5e33",
+          "dimension_id": "security",
+          "question_id": "security.technical_measures",
+          "rule_id": "security.technical_measures",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Medida técnica e contexto de proteção",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-2f3c5ba316220046f69c0286"
+          ]
+        },
+        {
+          "id": "finding:258a44373add045e3a2e8429c67a4e77dfc383a8c546b7e460cc633f0a23e052",
+          "dimension_id": "security",
+          "question_id": "security.access_controls",
+          "rule_id": "security.access_controls",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Controle de acesso, ator e recurso",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-1c3f8f6c0daf55bfe2a45379"
+          ]
+        },
+        {
+          "id": "finding:fbc1910cc22ac29bd64e791d759681d30a5e04bf5744e2cfaa05a083b424e330",
+          "dimension_id": "changes",
+          "question_id": "changes.notice_channel",
+          "rule_id": "changes.notice_channel",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Canal de aviso de mudanças",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-294bb88bad17a85947af71ed"
+          ]
+        },
+        {
+          "id": "finding:bcce02dde23f336b8e6e0cd57690416272bf9be3d2747c975f30c6771c5f7b90",
+          "dimension_id": "changes",
+          "question_id": "changes.notice_timing",
+          "rule_id": "changes.notice_timing",
+          "rule_version": "governance-rules-v2-dev2",
+          "kind": "information_gap",
+          "title": "Momento do aviso de mudanças",
+          "rationale": "Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-1ada7ff44f2652bb70c3f56e"
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-3b7151aece4ef0ff8ea5e802",
+          "template_id": "review.clarify.collection.data_types",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:540504ebe7c3b65dd88b1d46530cd7faa56cb4d68bfc102c1f3463c9385a0e15"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Tipos de dados coletados: Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Rubrica documental do projeto",
+              "edition": "documentary-quality-v2-draft1",
+              "section": "2, 6 e 7 — estados, entrada e revisão",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-10-12",
+              "verification_scope": "project_document",
+              "source_file": "docs/METODO_AVALIACAO.md",
+              "source_sha256": "80d9e00e1ff9bd6ebb0a157713f706f181b598fe8a3955562fac423fff943654",
+              "source_locator": "Seções 2, 6 e 7",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "high",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Esclarecer declaração ou entrada impeditiva.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-1f19728d0fa620d377a8b03a",
+          "template_id": "review.clarify.collection.purposes",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:cfa47835e1c1478ec5c43f90c70f4eeb4e703e48cfe0b3971a973bdcfe0a9708"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Relação entre dado e finalidade: Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Rubrica documental do projeto",
+              "edition": "documentary-quality-v2-draft1",
+              "section": "2, 6 e 7 — estados, entrada e revisão",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-10-12",
+              "verification_scope": "project_document",
+              "source_file": "docs/METODO_AVALIACAO.md",
+              "source_sha256": "80d9e00e1ff9bd6ebb0a157713f706f181b598fe8a3955562fac423fff943654",
+              "source_locator": "Seções 2, 6 e 7",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "high",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Esclarecer declaração ou entrada impeditiva.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-5f38dfd88e9d089721e3aed4",
+          "template_id": "access.channel.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:d13c2f47c471243611d4447d9f7c9a01883c131e179c30a7a4ee201db6fe5ede"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Canal de solicitação de direitos: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Indicar como solicitar acesso, correção ou exclusão.",
+          "how_to_do": [
+            "Confira como o atendimento recebe e encaminha cada tipo de solicitação.",
+            "Informe o canal e os passos necessários, sem exigir dados além dos necessários à identificação."
+          ],
+          "completion_evidence": [
+            "Canal de direitos testado e instruções conferidas"
+          ],
+          "suggested_role": "Encarregado e equipe de atendimento",
+          "references": [
+            {
+              "id": "A.1.3.10",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Handling requests",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.10",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-10-handling-requests-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B18:G18",
+              "control_role": "controller",
+              "summary": "Documentar recebimento, tratamento, prazos definidos para o contexto, escalonamento e registro das solicitações."
+            },
+            {
+              "id": "A.1.3.7",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Access, correction or erasure",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.7",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-7-access-correction-or-erasure-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B15:G15",
+              "control_role": "controller",
+              "summary": "Verificar procedimentos para acesso, correção e exclusão, incluindo identificação proporcional do solicitante."
+            }
+          ],
+          "pending_fields": [
+            "Canal de entrada",
+            "Tipo de solicitação",
+            "Prazo e marco inicial validados"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-56666eaef5bcf8d8b7501cf3",
+          "template_id": "access.response_time.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:f07a9e636ed7ac46e88ecb75163263598c35c737344b2555504f7175ec3c9eda"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Prazo de resposta e marco inicial: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Esclarecer quando o titular receberá retorno.",
+          "how_to_do": [
+            "Valide o prazo e seu marco inicial com os responsáveis, considerando as obrigações aplicáveis ao caso.",
+            "Informe duração, unidade e condições de contagem; não copie prazos de exemplos de outra jurisdição."
+          ],
+          "completion_evidence": [
+            "Prazo e marco inicial aprovados e descritos na política"
+          ],
+          "suggested_role": "Encarregado e equipe de atendimento",
+          "references": [
+            {
+              "id": "A.1.3.10",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Handling requests",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.10",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-10-handling-requests-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B18:G18",
+              "control_role": "controller",
+              "summary": "Documentar recebimento, tratamento, prazos definidos para o contexto, escalonamento e registro das solicitações."
+            }
+          ],
+          "pending_fields": [
+            "Canal de entrada",
+            "Tipo de solicitação",
+            "Prazo e marco inicial validados"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-294bb88bad17a85947af71ed",
+          "template_id": "changes.notice_channel.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:fbc1910cc22ac29bd64e791d759681d30a5e04bf5744e2cfaa05a083b424e330"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Canal de aviso de mudanças: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Informar onde as alterações serão comunicadas.",
+          "how_to_do": [
+            "Confira o canal efetivamente usado para avisar os titulares.",
+            "Identifique esse canal na política e explique como localizar a comunicação."
+          ],
+          "completion_evidence": [
+            "Canal de aviso conferido e descrito na política"
+          ],
+          "suggested_role": "Encarregado e comunicação",
+          "references": [
+            {
+              "id": "A.1.3.4",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Providing information to PII principals",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.4",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-4-providing-information-to-pii-principals-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B12:G12",
+              "control_role": "controller",
+              "summary": "Tornar as informações de privacidade compreensíveis, acessíveis e acompanhadas de um ponto de contato."
+            }
+          ],
+          "pending_fields": [
+            "Canal de aviso",
+            "Momento e evento do aviso",
+            "Responsável pela publicação"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-1ada7ff44f2652bb70c3f56e",
+          "template_id": "changes.notice_timing.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:bcce02dde23f336b8e6e0cd57690416272bf9be3d2747c975f30c6771c5f7b90"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Momento do aviso de mudanças: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Explicar quando as alterações serão comunicadas.",
+          "how_to_do": [
+            "Confirme em que momento o aviso ocorre em relação à mudança ou à sua entrada em vigor.",
+            "Descreva essa relação, distinguindo a data de atualização do documento do momento do aviso."
+          ],
+          "completion_evidence": [
+            "Momento de comunicação validado contra o processo de atualização"
+          ],
+          "suggested_role": "Encarregado e comunicação",
+          "references": [
+            {
+              "id": "A.1.3.3",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Determining information for PII principals",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.3",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-3-determining-information-for-pii-principals-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B11:G11",
+              "control_role": "controller",
+              "summary": "Definir conteúdo e momento das informações fornecidas aos titulares, incluindo dados, destinatários e retenção."
+            }
+          ],
+          "pending_fields": [
+            "Canal de aviso",
+            "Momento e evento do aviso",
+            "Responsável pela publicação"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-7023db747b15b45495e28e2c",
+          "template_id": "choice.channel.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:6cf803abd167bae310b243dafc075d87a369c2b0f36c32b3f888addd1c173067"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Canal localizável para escolhas: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Informar um canal localizável para exercer escolhas.",
+          "how_to_do": [
+            "Teste o endereço ou caminho de acesso ao mecanismo de escolha.",
+            "Publique o canal e relacione-o à escolha que ele permite exercer."
+          ],
+          "completion_evidence": [
+            "Canal publicado e conferido em um teste de uso"
+          ],
+          "suggested_role": "Encarregado e equipe responsável pelos canais",
+          "references": [
+            {
+              "id": "A.1.3.10",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Handling requests",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.10",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-10-handling-requests-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B18:G18",
+              "control_role": "controller",
+              "summary": "Documentar recebimento, tratamento, prazos definidos para o contexto, escalonamento e registro das solicitações."
+            },
+            {
+              "id": "A.1.3.4",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Providing information to PII principals",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.4",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-4-providing-information-to-pii-principals-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B12:G12",
+              "control_role": "controller",
+              "summary": "Tornar as informações de privacidade compreensíveis, acessíveis e acompanhadas de um ponto de contato."
+            }
+          ],
+          "pending_fields": [
+            "Tratamento afetado",
+            "Mecanismo e canal",
+            "Efeitos e condições da escolha"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-a252ad5c1edd19430f5f14c7",
+          "template_id": "choice.mechanism.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:9998e8b7b2832eadca012058c447567006b80bbf489d5edabce93f0ffd9553a9"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Procedimento para exercer uma escolha: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Explicar como o titular exerce suas escolhas.",
+          "how_to_do": [
+            "Confirme quais escolhas se aplicam ao tratamento descrito; não presuma que todo tratamento depende de consentimento.",
+            "Teste o mecanismo e descreva seus passos e efeitos, distinguindo retirada de consentimento e oposição."
+          ],
+          "completion_evidence": [
+            "Mecanismo testado e procedimento explicado ao titular"
+          ],
+          "suggested_role": "Encarregado e equipe responsável pelos canais",
+          "references": [
+            {
+              "id": "A.1.3.5",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Providing mechanism to modify or withdraw consent",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.5",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-5-modify-or-withdraw-consent-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B13:G13",
+              "control_role": "controller",
+              "summary": "Quando houver tratamento por consentimento, conferir como o titular pode modificá-lo ou retirá-lo."
+            },
+            {
+              "id": "A.1.3.6",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Providing mechanism to object to PII processing",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.6",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-6-object-to-pii-processing-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B14:G14",
+              "control_role": "controller",
+              "summary": "Conferir um mecanismo de oposição e o procedimento para analisar as solicitações no contexto aplicável."
+            }
+          ],
+          "pending_fields": [
+            "Tratamento afetado",
+            "Mecanismo e canal",
+            "Efeitos e condições da escolha"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-f96778294b076b23edaea24a",
+          "template_id": "retention.disposal.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:e2529088340752ae1918a2325a2e347673a6d7786c768937703663e719578d46"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Destinação ao final da retenção: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Explicar o destino dos dados após a retenção.",
+          "how_to_do": [
+            "Confirme como ocorre a destinação nos sistemas e cópias, sem executar exclusões durante a revisão.",
+            "Descreva a exclusão, anonimização ou outra destinação confirmada e suas exceções."
+          ],
+          "completion_evidence": [
+            "Procedimento de destinação conferido e descrito sem promessas não verificadas"
+          ],
+          "suggested_role": "Gestores dos dados, encarregado e TI",
+          "references": [
+            {
+              "id": "A.1.4.9",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Disposal",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.4.9",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-4-9-disposal-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B27:G27",
+              "control_role": "controller",
+              "summary": "Verificar procedimentos e registros de descarte adequados ao meio e ao ciclo de vida dos dados."
+            }
+          ],
+          "pending_fields": [
+            "Classe de dados",
+            "Critério e marco de retenção",
+            "Destinação e exceções"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-fe40263aa300d0b0546c71b2",
+          "template_id": "retention.duration.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:1c01ffb7bef77f94aea3ad4bc1ca31997824e93783f395ecce6ab1f155d77307"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Duração ou evento de retenção: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Especificar o prazo ou critério de retenção dos dados.",
+          "how_to_do": [
+            "Confirme na tabela de retenção os critérios por classe de dados e as exceções justificadas.",
+            "Informe o prazo ou evento de encerramento e, quando houver contagem, seu marco inicial."
+          ],
+          "completion_evidence": [
+            "Critérios de retenção aprovados e refletidos na política"
+          ],
+          "suggested_role": "Gestores dos dados, encarregado e TI",
+          "references": [
+            {
+              "id": "A.1.4.8",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Retention",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.4.8",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-4-8-retention-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B26:G26",
+              "control_role": "controller",
+              "summary": "Manter critérios de retenção por classe de dados, marco inicial, revisão e destinação ao término."
+            }
+          ],
+          "pending_fields": [
+            "Classe de dados",
+            "Critério e marco de retenção",
+            "Destinação e exceções"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-1c3f8f6c0daf55bfe2a45379",
+          "template_id": "security.access_controls.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:258a44373add045e3a2e8429c67a4e77dfc383a8c546b7e460cc633f0a23e052"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Controle de acesso, ator e recurso: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Esclarecer como o acesso aos dados é restrito.",
+          "how_to_do": [
+            "Confira quem pode acessar os dados e como permissões são concedidas, revisadas e removidas.",
+            "Explique a restrição a papéis autorizados, sem divulgar configurações sensíveis."
+          ],
+          "completion_evidence": [
+            "Revisão de permissões e descrição aprovada das restrições de acesso"
+          ],
+          "suggested_role": "Segurança da informação e TI",
+          "references": [
+            {
+              "id": "A.3.23",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Secure authentication",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.3.23",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/shared-security-controls-2025/a-3-23-secure-authentication-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B71:G71",
+              "control_role": "shared",
+              "summary": "Avaliar mecanismos de autenticação segundo restrições de acesso e contexto dos sistemas."
+            },
+            {
+              "id": "A.3.8",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Identity management",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.3.8",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/shared-security-controls-2025/a-3-8-identity-management-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B56:G56",
+              "control_role": "shared",
+              "summary": "Conferir o ciclo de criação, alteração, suspensão e encerramento de identidades em sistemas com dados pessoais."
+            },
+            {
+              "id": "A.3.9",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Access rights",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.3.9",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/shared-security-controls-2025/a-3-9-access-rights-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B57:G57",
+              "control_role": "shared",
+              "summary": "Conferir concessão, revisão e remoção de permissões e registros de quem pode acessar os dados."
+            }
+          ],
+          "pending_fields": [
+            "Medidas efetivas",
+            "Dados ou sistemas abrangidos",
+            "Papéis autorizados"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-2f3c5ba316220046f69c0286",
+          "template_id": "security.technical_measures.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:272a8b955c5b66b01fff7643513a7dd0e5bd7bc96ce376968c78893109eb5e33"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Medida técnica e contexto de proteção: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Descrever medidas de proteção e seu contexto.",
+          "how_to_do": [
+            "Confirme com a equipe técnica as medidas efetivas e os dados ou situações que protegem.",
+            "Avalie a referência de criptografia somente quando pertinente; ela não exige uma solução única para toda situação.",
+            "Descreva as medidas confirmadas sem expor segredos ou prometer segurança absoluta."
+          ],
+          "completion_evidence": [
+            "Descrição aprovada pela equipe técnica e vinculada às medidas verificadas"
+          ],
+          "suggested_role": "Segurança da informação e TI",
+          "references": [
+            {
+              "id": "A.3.26",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Use of cryptography",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.3.26",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/shared-security-controls-2025/a-3-26-use-of-cryptography-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B74:G74",
+              "control_role": "shared",
+              "summary": "Conferir regras de uso de criptografia e gestão de chaves antes de comunicar quais proteções são utilizadas."
+            }
+          ],
+          "pending_fields": [
+            "Medidas efetivas",
+            "Dados ou sistemas abrangidos",
+            "Papéis autorizados"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-182a8a697bf596cb92970a9a",
+          "template_id": "sharing.conditions.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:a7ccb74dd91a6877336b14051167efc5832277b36800f6063ff13b9790918546"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Condições do compartilhamento: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Explicar em quais situações os dados são compartilhados.",
+          "how_to_do": [
+            "Confirme finalidades, condições e exceções do compartilhamento com os responsáveis.",
+            "Quando houver operador, confira as instruções e o contrato; não presuma transferência internacional.",
+            "Relacione o destinatário às situações confirmadas no texto da política."
+          ],
+          "completion_evidence": [
+            "Condições de compartilhamento conferidas e descritas na política"
+          ],
+          "suggested_role": "Encarregado e gestão de fornecedores",
+          "references": [
+            {
+              "id": "A.1.2.7",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Contracts with PII processors",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.2.7",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-2-7-contracts-with-pii-processors-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B7:G7",
+              "control_role": "controller",
+              "summary": "Conferir escopo, instruções e responsabilidades nos contratos com operadores antes de descrever o compartilhamento."
+            },
+            {
+              "id": "A.1.5.5",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Records of PII disclosures to third parties",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.5.5",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-5-5-records-of-pii-disclosures-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B32:G32",
+              "control_role": "controller",
+              "summary": "Registrar divulgações a terceiros com dados envolvidos, destinatário, momento e autorização pertinente."
+            }
+          ],
+          "pending_fields": [
+            "Destinatários e seus papéis",
+            "Dados compartilhados",
+            "Finalidades e condições"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-fec256a0d0685bbba78bb8eb",
+          "template_id": "sharing.recipients.policy_wording",
+          "catalog_version": "governance-recommendations-v2-dev1:ad8ceb57c4e1527cc115e4bb54e61802c1678365205dc47fdc407a532a99db8d",
+          "finding_ids": [
+            "finding:3c2245ab4168fca07e42ac83bea8312f08f38c17d0d2ca1c6e4fd411296d73c2"
+          ],
+          "target": "policy_wording",
+          "trigger_reason": "Revisão sugerida pelos achados: Destinatários do compartilhamento: Nenhum suporte localizado nos segmentos examinados; ausência não comprovada.",
+          "what_to_do": "Esclarecer quem recebe os dados compartilhados.",
+          "how_to_do": [
+            "Confira os destinatários e seus papéis no registro de compartilhamentos.",
+            "Identifique destinatários ou categorias compreensíveis e explique quais dados recebem."
+          ],
+          "completion_evidence": [
+            "Destinatários descritos de acordo com o registro de compartilhamentos"
+          ],
+          "suggested_role": "Encarregado e gestão de fornecedores",
+          "references": [
+            {
+              "id": "A.1.3.3",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Determining information for PII principals",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.3.3",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-3-3-determining-information-for-pii-principals-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B11:G11",
+              "control_role": "controller",
+              "summary": "Definir conteúdo e momento das informações fornecidas aos titulares, incluindo dados, destinatários e retenção."
+            },
+            {
+              "id": "A.1.5.5",
+              "source_type": "public_guidance",
+              "title": "ISMS.online — Records of PII disclosures to third parties",
+              "edition": "ISO/IEC 27701:2025",
+              "section": "A.1.5.5",
+              "pdf_page": null,
+              "url": "https://www.isms.online/iso-27701/annex-a-2025/pii-controller-controls-2025/a-1-5-5-records-of-pii-disclosures-2025/",
+              "verified_by": "Codex — conferência do insumo fornecido",
+              "verified_at": "2026-09-28",
+              "verification_scope": "provided_workbook",
+              "source_file": "OPP-115 Treinamento/ISO 27701/ISO 27701.xlsx",
+              "source_sha256": "088ef7063c6583a042d2c0557493fc6f559b82b8eb9d95363cf1a6c4af7e60e0",
+              "source_locator": "Planilha1!B32:G32",
+              "control_role": "controller",
+              "summary": "Registrar divulgações a terceiros com dados envolvidos, destinatário, momento e autorização pertinente."
+            }
+          ],
+          "pending_fields": [
+            "Destinatários e seus papéis",
+            "Dados compartilhados",
+            "Finalidades e condições"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Referências para controlador: confirme o papel e o contexto da organização antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        }
+      ],
+      "limitations": [
+        "Avaliação documental experimental; não mede conformidade, proteção efetiva ou maturidade.",
+        "Heurísticas lexicais contextuais, sem compreensão semântica geral; revisão humana necessária.",
+        "Satisfação de uma pergunta indica ao menos uma relação encontrada, não um inventário exaustivo.",
+        "Conflitos reconhecidos são candidatos; variações de sujeito, escopo e exceções podem escapar.",
+        "Sem texto extraído e offsets, relações entre segmentos não são reconstruídas.",
+        "Recomendações de desenvolvimento: guias da planilha conferidos, sem conferência do texto integral da ISO e sem revisão técnica humana independente. Não comprovam atendimento aos controles."
+      ]
+    }
+  }
+}

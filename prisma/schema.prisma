@@ -1,0 +1,214 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =============================================
+// ENUMS
+// =============================================
+
+enum Role {
+  ADMIN
+  EVALUATOR
+}
+
+enum CompanySize {
+  MICRO
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum QuestionnaireCategory {
+  LGPD
+  ISO_27701
+  PRIVACY_BY_DESIGN
+}
+
+enum QuestionDomain {
+  GOVERNANCE
+  DATA_PROCESSING
+  DATA_SUBJECT_RIGHTS
+  SECURITY
+  INCIDENT_RESPONSE
+  PRIVACY_DESIGN
+}
+
+enum AssessmentStatus {
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
+enum MaturityLevel {
+  INITIAL
+  DEVELOPING
+  DEFINED
+  MANAGED
+  OPTIMIZED
+}
+
+// =============================================
+// MODELS
+// =============================================
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  session_version Int      @default(0)
+  password_hash String
+  role          Role     @default(EVALUATOR)
+  company_id    String?
+
+  company     Company?     @relation(fields: [company_id], references: [id])
+  assessments Assessment[]
+  policy_analyses PolicyAnalysis[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Company {
+  id     String       @id @default(uuid())
+  name   String
+  cnpj   String       @unique
+  sector String?
+  size   CompanySize?
+
+  users       User[]
+  assessments Assessment[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("companies")
+}
+
+model Questionnaire {
+  id          String                @id @default(uuid())
+  title       String
+  description String?
+  category    QuestionnaireCategory
+  version     Int                   @default(1)
+  is_active   Boolean               @default(true)
+
+  questions   Question[]
+  assessments Assessment[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("questionnaires")
+}
+
+model Question {
+  id               String         @id @default(uuid())
+  questionnaire_id String
+  text             String
+  guidance         String?
+  domain           QuestionDomain
+  weight           Int            @default(1)
+  order            Int
+
+  questionnaire Questionnaire @relation(fields: [questionnaire_id], references: [id], onDelete: Cascade)
+  answers       Answer[]
+
+  created_at DateTime @default(now())
+
+  @@map("questions")
+}
+
+model Assessment {
+  id               String           @id @default(uuid())
+  user_id          String
+  company_id       String
+  questionnaire_id String
+  status           AssessmentStatus @default(IN_PROGRESS)
+  overall_score    Float?
+  maturity_level   MaturityLevel?
+
+  user          User          @relation(fields: [user_id], references: [id])
+  company       Company       @relation(fields: [company_id], references: [id])
+  questionnaire Questionnaire @relation(fields: [questionnaire_id], references: [id])
+  answers       Answer[]
+  report        Report?
+
+  started_at   DateTime  @default(now())
+  completed_at DateTime?
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+
+  @@map("assessments")
+}
+
+model Answer {
+  id            String  @id @default(uuid())
+  assessment_id String
+  question_id   String
+  score         Int
+  justification String?
+  evidence_url  String?
+
+  assessment Assessment @relation(fields: [assessment_id], references: [id], onDelete: Cascade)
+  question   Question   @relation(fields: [question_id], references: [id])
+
+  created_at DateTime @default(now())
+
+  @@unique([assessment_id, question_id])
+  @@map("answers")
+}
+
+model Report {
+  id              String @id @default(uuid())
+  assessment_id   String @unique
+  summary         Json
+  domain_scores   Json
+  recommendations Json
+  gap_analysis    Json?
+
+  assessment Assessment @relation(fields: [assessment_id], references: [id], onDelete: Cascade)
+
+  generated_at DateTime @default(now())
+
+  @@map("reports")
+}
+
+enum PolicyAnalysisStatus {
+  processing
+  completed
+  failed
+}
+
+model PolicyAnalysis {
+  id                String @id @default(uuid())
+  user_id           String
+  user              User @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  original_filename String
+  storage_key       String @unique
+  file_sha256       String
+  byte_size         Int
+  language          String @default("pt")
+  document_scope    String
+  result_schema_version Int @default(2)
+  profile_id        String? @default("core-14-v1")
+  supersedes_analysis_id String?
+  supersedes        PolicyAnalysis? @relation("AnalysisRevisions", fields: [supersedes_analysis_id], references: [id], onDelete: SetNull)
+  revisions         PolicyAnalysis[] @relation("AnalysisRevisions")
+  status            PolicyAnalysisStatus @default(processing)
+  versions          Json?
+  result            Json?
+  error             Json?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  completed_at      DateTime?
+
+  @@index([user_id, created_at, id])
+  @@index([supersedes_analysis_id])
+  @@map("policy_analyses")
+}
