@@ -1,0 +1,14 @@
+**
+!Dockerfile
+!package.json
+!package-lock.json
+!prisma.config.ts
+!tsconfig.json
+!prisma/
+!prisma/**
+!scripts/
+!scripts/**
+!src/
+!src/**
+**/.env*
+**/*.log

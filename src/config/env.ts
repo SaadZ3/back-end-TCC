@@ -38,7 +38,8 @@ const envSchema = z.object({
       context.addIssue({ code: 'custom', path: ['APP_ORIGINS'], message: 'Configure explicitamente a origem HTTPS de produção.' });
   }
 });
-const parsed = envSchema.safeParse(process.env);
+// A hospedagem fornece PORT; APP_PORT continua disponível no ambiente local.
+const parsed = envSchema.safeParse({ ...process.env, APP_PORT: process.env.PORT ?? process.env.APP_PORT });
 if (!parsed.success) {
   console.error('Configuração inválida:', parsed.error.flatten().fieldErrors);
   process.exit(1);
