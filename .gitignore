@@ -33,3 +33,6 @@ sucrase.config.*
 # Resultados temporários de ferramentas de teste
 coverage/
 *.tsbuildinfo
+
+# Arquivos de configuração Agente
+.agents/
