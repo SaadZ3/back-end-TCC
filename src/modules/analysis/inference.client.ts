@@ -15,6 +15,15 @@ const statuses: Record<string, number> = {
   INTERNAL_ERROR: 500,
 };
 
+function containsNullCharacter(value: unknown): boolean {
+  if (typeof value === 'string') return value.includes('\u0000');
+  if (Array.isArray(value)) return value.some(containsNullCharacter);
+  if (value !== null && typeof value === 'object') {
+    return Object.entries(value).some(([key, item]) => key.includes('\u0000') || containsNullCharacter(item));
+  }
+  return false;
+}
+
 /** Recebe arquivo e escopo; retorna a análise validada do Python ou um erro público. */
 export async function infer(file: Express.Multer.File, scope: string) {
   const signal = AbortSignal.timeout(env.INFERENCE_TIMEOUT_MS);
@@ -42,6 +51,11 @@ export async function infer(file: Express.Multer.File, scope: string) {
       }
     } finally { await reader.cancel(); }
     const body: unknown = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+    // Recusa respostas de serviços antigos sem alterar citações e posições depois da avaliação.
+    if (containsNullCharacter(body)) {
+      throw new AnalysisError('INFERENCE_UNAVAILABLE',
+        'O serviço de análise retornou caracteres incompatíveis com o armazenamento. Atualize o serviço de análise e reenvie o documento.', 503);
+    }
     if (!response.ok) {
       const parsed = errorResponseSchema.safeParse(body);
       if (parsed.success && statuses[parsed.data.error.code]) {
