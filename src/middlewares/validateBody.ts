@@ -1,3 +1,4 @@
+/** Aplica o schema da rota ao corpo recebido antes de chamar o handler. */
 import { Request, Response, NextFunction } from 'express';
 import { ZodSchema } from 'zod';
 

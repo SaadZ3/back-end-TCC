@@ -1,11 +1,16 @@
+/** Converte falhas da API em respostas públicas sem expor detalhes internos. */
 import type { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import { AnalysisError } from '../modules/analysis/analysis.error.js';
 
 interface AppError extends Error { statusCode?: number; status?: number; type?: string; }
 
+/** Recebe uma falha e responde com o código público apropriado, sem expor dados internos. */
 export function errorHandler(err: AppError, _req: Request, res: Response, _next: NextFunction): void {
-  if (res.headersSent) { res.destroy(); return; }
+  if (res.headersSent) {
+    res.destroy();
+    return;
+  }
   if (err instanceof AnalysisError) {
     res.status(err.statusCode).json({
       error: { code: err.code, message: err.message },

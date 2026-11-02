@@ -1,3 +1,4 @@
+/** Verifica envio, consulta, reanálise e exclusão de documentos para proteger o comportamento do TCC. */
 import { before, after, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID, randomBytes, createHash } from 'node:crypto';

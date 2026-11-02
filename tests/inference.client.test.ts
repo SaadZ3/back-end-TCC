@@ -1,3 +1,4 @@
+/** Verifica comunicação e falhas entre backend e Python para proteger o comportamento do TCC. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 

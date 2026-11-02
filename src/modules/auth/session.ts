@@ -1,3 +1,4 @@
+/** Cria, confere e revoga cookies de sessão usados pelo frontend. */
 import type { CookieOptions, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
@@ -6,19 +7,22 @@ import { prisma } from '../../lib/prisma.js';
 
 export const SESSION_COOKIE = 'tcc_session';
 const claimsSchema = z.object({
-  sub: z.string().uuid(), version: z.number().int().nonnegative(),
+  sub: z.string().uuid(),
+  version: z.number().int().nonnegative(),
   exp: z.number().int().positive(),
 });
 export const cookieOptions: CookieOptions = {
   httpOnly: true, secure: env.NODE_ENV === 'production', sameSite: 'lax', path: '/api',
 };
 const userSelect = { id: true, name: true, email: true, role: true, session_version: true } as const;
-export type PublicUser = { id: string; name: string; email: string; role: 'ADMIN' | 'EVALUATOR' };
+export type PublicUser = { id: string; name: string; email: string; role: 'ADMIN' | 'EVALUATOR'; };
 
+/** Recebe o registro da conta e retorna apenas os campos públicos da sessão. */
 export function publicUser(user: PublicUser): PublicUser {
   return { id: user.id, name: user.name, email: user.email, role: user.role };
 }
 
+/** Recebe a requisição e retorna os dados do token válido, ou ausência de sessão. */
 export function readSessionClaims(req: Request) {
   const cookie: unknown = req.cookies?.[SESSION_COOKIE];
   if (typeof cookie !== 'string') return null;
@@ -29,6 +33,7 @@ export function readSessionClaims(req: Request) {
   } catch { return null; }
 }
 
+/** Recebe a requisição e retorna a sessão confirmada no banco, ou ausência de sessão. */
 export async function currentSession(req: Request) {
   const claims = readSessionClaims(req);
   if (!claims) return null;
@@ -37,7 +42,8 @@ export async function currentSession(req: Request) {
   return { user: publicUser(user), claims };
 }
 
-export function setSession(res: Response, user: { id: string; session_version: number }): string {
+/** Recebe resposta e usuário, grava o cookie e retorna a expiração da sessão. */
+export function setSession(res: Response, user: { id: string; session_version: number; }): string {
   const expires = Math.floor(Date.now() / 1000) + sessionTtlSeconds;
   const token = jwt.sign({ version: user.session_version, exp: expires }, env.TOKEN_SECRET, {
     subject: user.id, algorithm: 'HS256', issuer: 'tcc-back', audience: 'tcc-web',
@@ -46,6 +52,7 @@ export function setSession(res: Response, user: { id: string; session_version: n
   return new Date(expires * 1000).toISOString();
 }
 
+/** Recebe a resposta e remove o cookie com os mesmos atributos usados na criação. */
 export function clearSession(res: Response): void {
   res.clearCookie(SESSION_COOKIE, cookieOptions);
 }

@@ -1,3 +1,4 @@
+/** Valida a sessão e disponibiliza o perfil autenticado às rotas privadas. */
 import type { Request, Response, NextFunction } from 'express';
 import { clearSession, currentSession, type PublicUser } from '../modules/auth/session.js';
 
@@ -11,6 +12,7 @@ declare module 'express-serve-static-core' {
   }
 }
 
+/** Recebe a requisição, valida a sessão e chama a próxima etapa ou responde 401. */
 export async function authMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const session = await currentSession(req);
@@ -26,12 +28,4 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
     req.sessionExpiresAt = session.claims.exp;
     next();
   } catch (error) { next(error); }
-}
-
-export function adminOnly(req: Request, res: Response, next: NextFunction): void {
-  if (req.userRole !== 'ADMIN') {
-    res.status(403).json({ error: { code: 'FORBIDDEN', message: 'Acesso restrito a administradores.' } });
-    return;
-  }
-  next();
 }

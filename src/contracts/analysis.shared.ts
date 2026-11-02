@@ -1,3 +1,4 @@
+/** Reúne campos comuns aos contratos de upload, análise e erro. */
 import { z } from 'zod';
 const identifier = z.string().min(1);
 const fraction = z.number().min(0).max(1);
@@ -39,7 +40,8 @@ export const resultFields = {
     tokenizer_sha256: z.string().regex(/^[a-f0-9]{64}$/),
   }).optional(),
   extraction: z.object({
-    status: z.enum(['ok', 'partial']), warnings: z.array(z.string()),
+    status: z.enum(['ok', 'partial']),
+    warnings: z.array(z.string()),
     text: z.string().optional(),
     page_count: z.number().int().positive().nullable().optional(),
     pages: z.array(z.object({

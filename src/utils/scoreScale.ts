@@ -1,8 +1,10 @@
+/** Aplica a escala 0–3 e adapta resultados antigos somente durante a leitura. */
 export const SCORE_SCALE = 'ordinal_0_3' as const;
 export type Grade = 0 | 1 | 2 | 3;
 // Mesma tolerância do Python para resíduos de cálculo nas fronteiras das faixas.
 const BOUNDARY_TOLERANCE = 1e-12;
 
+/** Recebe percentual finito entre 0 e 100 e retorna sua faixa inteira de 0 a 3. */
 export function classifyPercentage(value: number): Grade {
   if (!Number.isFinite(value) || value < 0 || value > 100) {
     throw new RangeError('O percentual deve ser finito e estar entre 0 e 100.');
@@ -22,15 +24,14 @@ export function normalizeStoredResult(result: unknown): unknown {
   if (!record(result) || !record(result.evaluation) || result.evaluation.score_scale !== undefined) return result;
   const converted = structuredClone(result);
   const evaluation = converted.evaluation as Record<string, unknown>;
-  for (const key of ['score']) {
-    if (typeof evaluation[key] === 'number') evaluation[key] = classifyPercentage(evaluation[key]);
+  if (typeof evaluation.score === 'number') {
+    evaluation.score = classifyPercentage(evaluation.score);
   }
-  for (const key of ['dimensions']) {
-    if (!Array.isArray(evaluation[key])) continue;
-    for (const item of evaluation[key]) {
-      if (!record(item)) continue;
-      if (typeof item.score === 'number') item.score = classifyPercentage(item.score);
-      if (typeof item.contribution === 'number') item.contribution = item.contribution * 3 / 100;
+  if (Array.isArray(evaluation.dimensions)) {
+    for (const dimension of evaluation.dimensions) {
+      if (!record(dimension)) continue;
+      if (typeof dimension.score === 'number') dimension.score = classifyPercentage(dimension.score);
+      if (typeof dimension.contribution === 'number') dimension.contribution = dimension.contribution * 3 / 100;
     }
   }
   evaluation.score_scale = SCORE_SCALE;

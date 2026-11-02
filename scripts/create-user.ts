@@ -1,3 +1,4 @@
+/** Cria uma conta pelo terminal sem colocar a senha na linha de comando. */
 import { parseArgs } from 'node:util';
 import { z } from 'zod';
 import { prisma } from '../src/lib/prisma.js';
@@ -5,6 +6,7 @@ import { provisionUser } from '../src/modules/auth/provision-user.js';
 
 const usage = 'Use: node --import tsx scripts/create-user.ts --name "Seu Nome" --email "seu-email@exemplo.com"';
 
+/** Cria uma conta pelo terminal sem colocar a senha na linha de comando. */
 async function main() {
   try {
     const { values } = parseArgs({ options: { name: { type: 'string' }, email: { type: 'string' } } });
@@ -26,7 +28,7 @@ async function main() {
     }
     console.error(error instanceof z.ZodError ? error.issues.map(issue => issue.message).join(' ') :
       error instanceof Error && (error.message.startsWith('Já existe') || error.message === 'Defina TCC_USER_PASSWORD temporariamente, conforme o README.') ? error.message :
-      'Não foi possível criar a conta. Confira os argumentos, a senha temporária e o banco.');
+        'Não foi possível criar a conta. Confira os argumentos, a senha temporária e o banco.');
     process.exitCode = 1;
   } finally { await prisma.$disconnect(); }
 }

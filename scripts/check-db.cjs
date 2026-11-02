@@ -1,7 +1,9 @@
+/** Confere a conexão PostgreSQL e as tabelas esperadas pelo backend. */
 // Verificação somente de leitura; nunca imprime credenciais ou a URL.
 require('dotenv').config({ quiet: true });
 const { Client } = require('pg');
 
+/** Confere a conexão PostgreSQL e as tabelas esperadas pelo backend. */
 async function main() {
   if (!process.env.DATABASE_URL) {
     console.error('Defina DATABASE_URL no .env antes de verificar o banco.');
@@ -26,4 +28,7 @@ async function main() {
   }
 }
 
-main().catch(() => { console.error('Falha ao encerrar verificação.'); process.exitCode = 1; });
+main().catch(() => {
+  console.error('Falha ao encerrar verificação.');
+  process.exitCode = 1;
+});

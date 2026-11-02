@@ -1,3 +1,4 @@
+# Exclui arquivos locais e privados do contexto de build do backend.
 **
 !Dockerfile
 !package.json

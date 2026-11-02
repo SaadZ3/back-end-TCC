@@ -1,3 +1,4 @@
+/** Expõe envio, histórico, consulta, download e exclusão de análises privadas. */
 import { Router } from 'express';
 import { z } from 'zod';
 import { authMiddleware } from '../../middlewares/auth.js';
@@ -9,9 +10,15 @@ import { AnalysisError } from './analysis.error.js';
 let busy = false;
 const router = Router();
 router.use(authMiddleware);
+/** Recebe arquivo e escopo e responde com a análise; recusa uma segunda análise simultânea. */
 router.post('/', async (req, res, next) => {
   if (busy) {
-    res.status(503).json({ error: { code: 'INFERENCE_UNAVAILABLE', message: 'Há uma análise em andamento. Aguarde e tente novamente.' } });
+    res.status(503).json({
+      error: {
+        code: 'INFERENCE_UNAVAILABLE',
+        message: 'Há uma análise em andamento. Aguarde e tente novamente.'
+      }
+    });
     return;
   }
   busy = true;
@@ -29,24 +36,48 @@ const pagination = z.strictObject({
   page: z.coerce.number().int().min(1).max(100000).default(1),
   page_size: z.coerce.number().int().min(1).max(50).default(20),
 });
+/** Recebe a paginação e retorna somente análises da pessoa autenticada. */
 router.get('/', async (req, res) => {
   const { page, page_size } = pagination.parse(req.query);
   const where = { user_id: req.userId!, result_schema_version: 2 };
   const [rows, total] = await prisma.$transaction([
-    prisma.policyAnalysis.findMany({ where, orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
-      skip: (page - 1) * page_size, take: page_size,
-      select: { id: true, original_filename: true, created_at: true, status: true, result_schema_version: true, supersedes_analysis_id: true } }),
+    prisma.policyAnalysis.findMany({
+      where,
+      orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
+      skip: (page - 1) * page_size,
+      take: page_size,
+      select: {
+        id: true,
+        original_filename: true,
+        created_at: true,
+        status: true,
+        result_schema_version: true,
+        supersedes_analysis_id: true
+      }
+    }),
     prisma.policyAnalysis.count({ where }),
   ]);
-  res.json({ items: rows.map(row => ({ analysis_id: row.id, original_filename: row.original_filename,
-    created_at: row.created_at.toISOString(), status: row.status,
-    schema_version: row.result_schema_version, supersedes_analysis_id: row.supersedes_analysis_id })), page, page_size, total });
+  res.json({
+    items: rows.map(row => ({
+      analysis_id: row.id,
+      original_filename: row.original_filename,
+      created_at: row.created_at.toISOString(),
+      status: row.status,
+      schema_version: row.result_schema_version,
+      supersedes_analysis_id: row.supersedes_analysis_id
+    })),
+    page,
+    page_size,
+    total
+  });
 });
 const idSchema = z.uuid();
+/** Recebe o ID próprio e responde 204 depois de excluir a análise concluída ou falha. */
 router.delete('/:id', async (req, res) => {
   await deleteAnalysis(idSchema.parse(req.params.id), req.userId!);
   res.status(204).end();
 });
+/** Recebe o ID próprio e transmite o documento privado com o nome original. */
 router.get('/:id/file', async (req, res, next) => {
   const row = await ownedAnalysis(idSchema.parse(req.params.id), req.userId!);
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -54,10 +85,14 @@ router.get('/:id/file', async (req, res, next) => {
     headers: { 'Content-Type': 'application/octet-stream', 'Cache-Control': 'no-store' },
   }, error => {
     if (!error) return;
-    if (res.headersSent) { res.destroy(); return; }
+    if (res.headersSent) {
+      res.destroy();
+      return;
+    }
     next(new AnalysisError('NOT_FOUND', 'Arquivo indisponível.', 404));
   });
 });
+/** Recebe o ID próprio e retorna o estado e o resultado validado da análise. */
 router.get('/:id', async (req, res) => {
   const row = await ownedAnalysis(idSchema.parse(req.params.id), req.userId!);
   res.json(serialize(row));

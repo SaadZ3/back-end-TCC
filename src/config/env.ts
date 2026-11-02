@@ -1,3 +1,4 @@
+/** Valida as variáveis do ambiente antes de aceitar requisições. */
 import { z } from 'zod';
 import dotenv from 'dotenv';
 import path from 'node:path';
@@ -23,9 +24,16 @@ const envSchema = z.object({
 }).superRefine((value, context) => {
   const origins = value.APP_ORIGINS.split(',').map(item => item.trim());
   if (!origins.length || origins.some(origin => {
-    try { const url = new URL(origin); return url.origin !== origin || !['http:', 'https:'].includes(url.protocol); }
+    try {
+      const url = new URL(origin);
+      return url.origin !== origin || !['http:', 'https:'].includes(url.protocol);
+    }
     catch { return true; }
-  })) context.addIssue({ code: 'custom', path: ['APP_ORIGINS'], message: 'Informe origens HTTP(S) completas, sem caminhos.' });
+  })) context.addIssue({
+    code: 'custom',
+    path: ['APP_ORIGINS'],
+    message: 'Informe origens HTTP(S) completas, sem caminhos.'
+  });
   const amount = Number.parseInt(value.TOKEN_EXPIRATION, 10);
   const unit = value.TOKEN_EXPIRATION.slice(-1);
   const seconds = amount * ({ m: 60, h: 3600, d: 86400 }[unit] ?? 0);
@@ -33,9 +41,17 @@ const envSchema = z.object({
     context.addIssue({ code: 'custom', path: ['TOKEN_EXPIRATION'], message: 'Use uma duração entre 1m e 7d.' });
   if (value.NODE_ENV === 'production') {
     if (value.TOKEN_SECRET.length < 32)
-      context.addIssue({ code: 'custom', path: ['TOKEN_SECRET'], message: 'Produção exige segredo de pelo menos 32 caracteres.' });
+      context.addIssue({
+        code: 'custom',
+        path: ['TOKEN_SECRET'],
+        message: 'Produção exige segredo de pelo menos 32 caracteres.'
+      });
     if (!process.env.APP_ORIGINS || origins.some(origin => !origin.startsWith('https://')))
-      context.addIssue({ code: 'custom', path: ['APP_ORIGINS'], message: 'Configure explicitamente a origem HTTPS de produção.' });
+      context.addIssue({
+        code: 'custom',
+        path: ['APP_ORIGINS'],
+        message: 'Configure explicitamente a origem HTTPS de produção.'
+      });
   }
 });
 // A hospedagem fornece PORT; APP_PORT continua disponível no ambiente local.

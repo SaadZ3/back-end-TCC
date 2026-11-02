@@ -1,13 +1,21 @@
+/** Envia o documento ao Python e confere a resposta antes de persistir. */
 import { createHash } from 'node:crypto';
 import { env } from '../../config/env.js';
 import { inferenceResponseSchema, errorResponseSchema } from '../../contracts/analysis.js';
 import { AnalysisError } from './analysis.error.js';
 
 const statuses: Record<string, number> = {
-  INVALID_INPUT: 400, FILE_TOO_LARGE: 413, UNSUPPORTED_FORMAT: 415, UNREADABLE_FILE: 422,
-  OCR_REQUIRED: 422, INFERENCE_UNAVAILABLE: 503, ANALYSIS_TIMEOUT: 504, INTERNAL_ERROR: 500,
+  INVALID_INPUT: 400,
+  FILE_TOO_LARGE: 413,
+  UNSUPPORTED_FORMAT: 415,
+  UNREADABLE_FILE: 422,
+  OCR_REQUIRED: 422,
+  INFERENCE_UNAVAILABLE: 503,
+  ANALYSIS_TIMEOUT: 504,
+  INTERNAL_ERROR: 500,
 };
 
+/** Recebe arquivo e escopo; retorna a análise validada do Python ou um erro público. */
 export async function infer(file: Express.Multer.File, scope: string) {
   const signal = AbortSignal.timeout(env.INFERENCE_TIMEOUT_MS);
   const data = new FormData();
@@ -25,7 +33,7 @@ export async function infer(file: Express.Multer.File, scope: string) {
     const reader = response.body?.getReader();
     if (!reader) throw new Error('Empty response');
     try {
-      for (;;) {
+      for (; ;) {
         const { value, done } = await reader.read();
         if (done) break;
         size += value.byteLength;
@@ -44,8 +52,8 @@ export async function infer(file: Express.Multer.File, scope: string) {
     }
     const parsed = inferenceResponseSchema.parse(body);
     if (parsed.result.document_scope !== scope ||
-        parsed.result.source?.sha256 !== createHash('sha256').update(file.buffer).digest('hex') ||
-        parsed.result.source.byte_size !== file.size) throw new Error('Mismatched source');
+      parsed.result.source?.sha256 !== createHash('sha256').update(file.buffer).digest('hex') ||
+      parsed.result.source.byte_size !== file.size) throw new Error('Mismatched source');
     return parsed;
   } catch (error) {
     if (signal.aborted) throw new AnalysisError('ANALYSIS_TIMEOUT', 'O serviço de análise excedeu o tempo limite.', 504);

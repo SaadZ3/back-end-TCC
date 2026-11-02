@@ -1,3 +1,4 @@
+# Seleciona os arquivos enviados ? publica??o do backend.
 .git/
 node_modules/
 dist/

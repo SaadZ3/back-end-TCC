@@ -1,3 +1,4 @@
+/** Valida nome, e-mail e senha usados no cadastro e login. */
 import { z } from 'zod';
 
 export const emailSchema = z.string().trim().toLowerCase().email('E-mail inválido').max(254);

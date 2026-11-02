@@ -1,3 +1,4 @@
+/** Verifica integração de análises com o modelo Python real para proteger o comportamento do TCC. */
 import { before, after, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';

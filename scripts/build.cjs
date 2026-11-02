@@ -1,3 +1,4 @@
+/** Limpa a saída anterior e compila o backend, evitando módulos antigos no build. */
 const { rmSync } = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');

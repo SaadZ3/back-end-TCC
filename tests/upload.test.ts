@@ -1,3 +1,4 @@
+/** Verifica limites e integridade do envio de documentos para proteger o comportamento do TCC. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';

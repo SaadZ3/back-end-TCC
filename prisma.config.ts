@@ -1,3 +1,4 @@
+/** Configura schema e migrations usados pelo Prisma no backend. */
 import 'dotenv/config';
 import { defineConfig } from 'prisma/config';
 

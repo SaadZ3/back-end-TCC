@@ -1,3 +1,4 @@
+/** Recebe um único arquivo com limites de tamanho e tempo. */
 import multer from 'multer';
 import type { Request, Response } from 'express';
 import { env } from '../../config/env.js';
@@ -7,9 +8,17 @@ const parse = multer({
   storage: multer.memoryStorage(),
   // O navegador envia nomes de arquivo em UTF-8 no multipart.
   defParamCharset: 'utf8',
-  limits: { fileSize: env.MAX_UPLOAD_BYTES, files: 1, fields: 4, parts: 6, fieldSize: 1024, fieldNameSize: 100 },
+  limits: {
+    fileSize: env.MAX_UPLOAD_BYTES,
+    files: 1,
+    fields: 4,
+    parts: 6,
+    fieldSize: 1024,
+    fieldNameSize: 100
+  },
 }).single('file');
 
+/** Recebe requisição e resposta; conclui a leitura limitada ou rejeita o envio. */
 export function receiveUpload(req: Request, res: Response): Promise<void> {
   if (!req.is('multipart/form-data')) return Promise.reject(new AnalysisError('INVALID_INPUT', 'Envie um arquivo em multipart/form-data.', 400));
   const maximum = env.MAX_UPLOAD_BYTES + 64 * 1024;

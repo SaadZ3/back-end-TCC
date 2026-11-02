@@ -1,3 +1,4 @@
+/** Verifica recomendações, referências e versões do catálogo para proteger o comportamento do TCC. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';

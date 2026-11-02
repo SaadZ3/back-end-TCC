@@ -1,8 +1,10 @@
+/** Recupera análises interrompidas e inicia o servidor HTTP do backend. */
 import { env } from './config/env.js';
 import app from './app.js';
 import { prisma } from './lib/prisma.js';
 import { recoverInterruptedAnalyses } from './modules/analysis/analysis.service.js';
 
+/** Recupera análises interrompidas antes de abrir o servidor para requisições. */
 async function start() {
   await recoverInterruptedAnalyses();
   const server = app.listen(env.APP_PORT, () => {

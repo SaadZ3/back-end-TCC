@@ -1,3 +1,4 @@
+/** Define as regras de verificação do TypeScript do backend. */
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 
