@@ -136,6 +136,7 @@ export const evaluationSchema = z.strictObject({
   language: z.literal('pt'),
   index: z.literal('documentary_information_quality'),
   method_version: id,
+  uncertainty_policy: z.literal('exclude_inconclusive_evidence_v1').optional(),
   profile_id: z.literal('core-14-v1'),
   profile_sha256: hash,
   validation_status: z.literal('not_human_validated'),
@@ -143,7 +144,7 @@ export const evaluationSchema = z.strictObject({
   score_status: z.enum(['available', 'blocked']),
   score: score.nullable(),
   score_blockers: z.array(z.enum(['document_scope_incomplete', 'extraction_partial', 'truncated_segments',
-    'no_usable_segments', 'unknown_applicability', 'inconclusive_questions', 'no_applicable_questions'])),
+    'no_usable_segments', 'unknown_applicability', 'inconclusive_questions', 'no_applicable_questions', 'no_evaluable_questions'])),
   rules_version: id,
   rules_sha256: hash,
   predictions_sha256: hash,
@@ -176,6 +177,9 @@ export const analysisResultSchema = z.strictObject({
   const fail = (message: string) => ctx.addIssue({ code: 'custom', message });
   const sameNumber = (a: number | null, b: number | null) => a === null || b === null ? a === b : Math.abs(a - b) < 1e-8;
   const evaluation = result.evaluation;
+  const excludeUncertain = evaluation.method_version === 'documentary-quality-v4-draft1';
+  if (excludeUncertain !== (evaluation.uncertainty_policy === 'exclude_inconclusive_evidence_v1') ||
+    (excludeUncertain && evaluation.score_scale !== 'continuous_0_3')) fail('Política de incerteza incompatível com o método.');
   const segments = new Map(result.segments.map(s => [s.segment_id, s]));
   if (segments.size !== result.segments.length) fail('Trechos duplicados.');
   const extractedCharacters = Array.from(result.extraction.text);
@@ -191,9 +195,11 @@ export const analysisResultSchema = z.strictObject({
   if (result.segments.some(s => s.truncated)) blockers.push('truncated_segments');
   const usableSegmentCount = result.segments.filter(s => !s.truncated).length;
   if (!usableSegmentCount) blockers.push('no_usable_segments');
-  if (questions.some(q => q.status === 'inconclusive')) blockers.push('inconclusive_questions');
+  const inputPartial = blockers.length > 0;
+  if (!excludeUncertain && questions.some(q => q.status === 'inconclusive')) blockers.push('inconclusive_questions');
+  if (excludeUncertain && usableSegmentCount && questions.every(q => q.value === null)) blockers.push('no_evaluable_questions');
   if (JSON.stringify(evaluation.score_blockers) !== JSON.stringify(blockers)) fail('Bloqueios inconsistentes.');
-  const input = !usableSegmentCount ? 'no_usable_segments' : blockers.some(b => b !== 'inconclusive_questions') ? 'partial_input' : 'complete_input';
+  const input = !usableSegmentCount ? 'no_usable_segments' : inputPartial ? 'partial_input' : 'complete_input';
   if (evaluation.input_status !== input || evaluation.score_status !== (blockers.length ? 'blocked' : 'available')) fail('Estado de entrada ou nota inválido.');
   if (evaluation.policy_id !== result.source.sha256) fail('Identidade da política divergente.');
   const findings = new Map(evaluation.findings.map(f => [f.id, f]));
@@ -202,20 +208,25 @@ export const analysisResultSchema = z.strictObject({
   function checkScores() {
     const grade = (percentage: number) => evaluation.score_scale === 'continuous_0_3'
       ? percentage * 3 / 100 : classifyPercentage(percentage);
-    const weights = evaluation.dimensions.reduce((sum, d) => sum + d.weight, 0);
+    const active = (d: z.infer<typeof dimension>) => usableSegmentCount > 0 && d.questions.some(q => q.value !== null);
+    const weights = evaluation.dimensions.reduce((sum, d) => sum + (!excludeUncertain || active(d) ? d.weight : 0), 0);
     for (const d of evaluation.dimensions) {
       if (d.questions.length !== 2 || d.questions.some(q => q.dimension_id !== d.id || !q.id.startsWith(d.id + '.'))) fail('Perguntas em dimensão incorreta.');
       const resolved = d.questions.filter(q => q.value !== null).length;
       const points = d.questions.reduce((sum, q) => sum + (q.value ?? 0), 0);
-      const expected = resolved === 2 && usableSegmentCount ? grade(points * 50) : null;
-      if (d.applicable_questions !== 2 || d.unknown_applicability_questions !== 0 || d.excluded_questions !== 0 ||
+      const denominator = excludeUncertain ? resolved : 2;
+      const expected = denominator && usableSegmentCount && (excludeUncertain || resolved === 2) ? grade(100 * points / denominator) : null;
+      const weight = weights && (!excludeUncertain || active(d)) ? d.weight / weights : 0;
+      if (d.applicable_questions !== 2 || d.unknown_applicability_questions !== 0 || d.excluded_questions !== (excludeUncertain ? 2 - resolved : 0) ||
         d.resolved_questions !== resolved || d.inconclusive_questions !== 2 - resolved || !sameNumber(d.earned_points, points) ||
-        !sameNumber(d.score, expected) || !sameNumber(d.normalized_weight, d.weight / weights) ||
+        !sameNumber(d.score, expected) || !sameNumber(d.normalized_weight, weight) ||
         d.status !== (expected === null ? 'unresolved' : 'resolved') ||
-        !sameNumber(d.contribution, blockers.length ? null : points / 2 * 3 * d.weight / weights)) fail('Memória de cálculo inconsistente.');
+        !sameNumber(d.contribution, blockers.length || expected === null ? null : excludeUncertain ? expected * weight : points / 2 * 3 * weight)) fail('Memória de cálculo inconsistente.');
     }
-    const percentage = evaluation.dimensions.reduce((sum, d) => sum + 50 * d.earned_points * d.weight / weights, 0);
-    if (!sameNumber(evaluation.score, blockers.length ? null : grade(Math.min(100, percentage)))) fail('Nota global inconsistente.');
+    const total = excludeUncertain
+      ? Math.min(3, evaluation.dimensions.reduce((sum, d) => sum + (d.contribution ?? 0), 0))
+      : grade(Math.min(100, evaluation.dimensions.reduce((sum, d) => sum + 50 * d.earned_points * d.weight / weights, 0)));
+    if (!sameNumber(evaluation.score, blockers.length ? null : total)) fail('Nota global inconsistente.');
   }
   checkScores();
   const checkScope = (s: z.infer<typeof search>) => {
@@ -246,6 +257,10 @@ export const analysisResultSchema = z.strictObject({
       if ((q.status === 'supported' && (q.missing_elements.length || !q.supporting_groups.length)) ||
         (q.status === 'partial' && (!q.missing_elements.length || !q.supporting_groups.length)) ||
         (q.status === 'not_detected' && q.supporting_groups.length)) fail('Suporte incompatível com estado.');
+      if (excludeUncertain && (q.status === 'inconclusive' && (!q.contextual_groups.length || q.supporting_groups.length) ||
+        q.supporting_groups.some(g => g.evidence.some(e => q.contextual_groups.some(c => c.evidence.some(ref =>
+          e.segment_id === ref.segment_id && e.start < ref.end && ref.start < e.end))))))
+        fail('Passagem inconclusiva não pode sustentar a pontuação.');
       if (q.finding_ids.some(id => findings.get(id)?.question_id !== q.id)) fail('Vínculo de achado inválido.');
       checkScope(q.search_scope);
       for (const g of [...q.supporting_groups, ...q.contextual_groups]) checkGroup(g);

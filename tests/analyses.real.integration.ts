@@ -111,10 +111,12 @@ test('modelo real: perfil → inferência → banco → recarga, reanálise e pa
   assert.equal(partial.result.evaluation.score,null); assert.equal(partial.result.evaluation.score_status,'blocked');
   const conflict = await (await fetch(base+'/api/analyses',{method:'POST',headers,
     body:form('full_document',false,Buffer.from('Coletamos nome. Não coletamos nome.'))})).json();
-  assert.equal(conflict.result.evaluation.score,null);
+  assert.equal(conflict.result.evaluation.score,0);
   assert.ok(conflict.result.evaluation.recommendations.length > 0);
   assert.deepEqual((await (await fetch(base+'/api/analyses/'+conflict.analysis_id,{headers})).json()).result,conflict.result);
-  assert.ok(conflict.result.evaluation.score_blockers.includes('inconclusive_questions'));
+  assert.deepEqual(conflict.result.evaluation.score_blockers,[]);
+  assert.equal(conflict.result.evaluation.uncertainty_policy,'exclude_inconclusive_evidence_v1');
+  assert.equal(conflict.result.evaluation.dimensions.find((d: {id:string})=>d.id==='collection').normalized_weight,0);
   const summary = {validation:'real_model_local_test_database',seconds:(performance.now()-start)/1000,
     segments:body.result.segments.length,score:body.result.evaluation.score,partial_score:partial.result.evaluation.score,
     conflict_score:conflict.result.evaluation.score,exact_python_node_database_reload:true};

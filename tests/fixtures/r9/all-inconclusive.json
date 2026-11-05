@@ -1,0 +1,2210 @@
+{
+  "schema_version": 2,
+  "versions": {
+    "model": "synthetic-labels-not-model-inference",
+    "preprocessing": "synthetic-fixture",
+    "scoring": "governance-rules-v4-dev1:0303b692e943ad8f835244e4a3f7d0e3502af35cd003c969c1b2a2697aed0b75",
+    "recommendations": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7"
+  },
+  "result": {
+    "document_scope": "full_document",
+    "source": {
+      "filename": "synthetic-e4.txt",
+      "format": "txt",
+      "byte_size": 41,
+      "sha256": "82909e59c4cb9e19175d7bdc02a3e4672cd4cb575957b7b7cd59dec2cb7efd04"
+    },
+    "preprocessing": {
+      "version": "synthetic-fixture-not-inference",
+      "max_length": 512,
+      "tokenizer_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "extraction": {
+      "status": "ok",
+      "warnings": [],
+      "text": "Informações dependem de esclarecimento.",
+      "page_count": null,
+      "pages": [
+        {
+          "page_number": null,
+          "char_start": 0,
+          "char_end": 39,
+          "status": "ok"
+        }
+      ]
+    },
+    "segments": [
+      {
+        "segment_id": "s0",
+        "text": "Informações dependem de esclarecimento.",
+        "char_start": 0,
+        "char_end": 39,
+        "page_start": null,
+        "page_end": null,
+        "labels": [
+          "Other"
+        ],
+        "n_tokens": 20,
+        "probabilities": {
+          "First Party Collection/Use": 0.01,
+          "Third Party Sharing/Collection": 0.01,
+          "User Choice/Control": 0.01,
+          "User Access, Edit and Deletion": 0.01,
+          "Data Retention": 0.01,
+          "Data Security": 0.01,
+          "Policy Change": 0.01,
+          "Do Not Track": 0.01,
+          "International and Specific Audiences": 0.01,
+          "Other": 0.99
+        },
+        "truncated": false
+      }
+    ],
+    "evaluation": {
+      "schema_version": 2,
+      "policy_id": "82909e59c4cb9e19175d7bdc02a3e4672cd4cb575957b7b7cd59dec2cb7efd04",
+      "language": "pt",
+      "uncertainty_policy": "exclude_inconclusive_evidence_v1",
+      "index": "documentary_information_quality",
+      "method_version": "documentary-quality-v4-draft1",
+      "score_scale": "continuous_0_3",
+      "profile_id": "core-14-v1",
+      "profile_sha256": "4ae42318d5cb9125026fb964d7dd2be262ecc6e470d5961c2ecd733cf231adc6",
+      "validation_status": "not_human_validated",
+      "input_status": "complete_input",
+      "score_status": "blocked",
+      "score": null,
+      "score_blockers": [
+        "no_evaluable_questions"
+      ],
+      "rules_version": "governance-rules-v4-dev1",
+      "rules_sha256": "0303b692e943ad8f835244e4a3f7d0e3502af35cd003c969c1b2a2697aed0b75",
+      "predictions_sha256": "46ca634277ab0d52eec007d1196eeafdd718f65b9300d0213688d818d307379a",
+      "fallback_enabled": true,
+      "dimensions": [
+        {
+          "id": "collection",
+          "title": "Coleta e uso",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "collection.data_types",
+              "dimension_id": "collection",
+              "title": "Tipos de dados coletados ou usados",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "collection_practice",
+                "identifiable_data_type"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.data_types",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:1309cea90a876e0dd2c1738bda1b099461ceb7a1722bf00cfafbea1ed066e241"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:0f02983dc354645c58d170fa0e732fc170e04787e60464203eac495a6cc124ab"
+              ]
+            },
+            {
+              "id": "collection.purposes",
+              "dimension_id": "collection",
+              "title": "Relação entre dado e finalidade",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "collected_data_type",
+                "specific_purpose"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.purposes",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:28ef0cc30cbbedab1aa88703ba47282a38daf4d0130f33c536e5b60a547d6972"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:2c52b2b64bcd864fcbf831d24177af90c48afa0f3e33814cc4101829cebccd83"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sharing",
+          "title": "Compartilhamento",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "sharing.recipients",
+              "dimension_id": "sharing",
+              "title": "Destinatários do compartilhamento",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "sharing.recipients",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "sharing_practice",
+                "identifiable_recipient"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "sharing.recipients",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:b8203b3f3cd4dd8a96b329fa7ba3e4f897c43b898389f7a9c5bbb73bf2762d13"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:1884e15fd489be0ef9a3d4956f0b5c9de39ca1ada1a2996fed77810d7bf76860"
+              ]
+            },
+            {
+              "id": "sharing.conditions",
+              "dimension_id": "sharing",
+              "title": "Condições do compartilhamento",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "sharing.conditions",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "identifiable_recipient",
+                "purpose_condition_or_prohibition"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "sharing.conditions",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:50dbab6462d9f90b0312b3065d9cd2dc0a0001ac3d47247dc4fa9fb3792d196d"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:72987aaaa12aa1e570a9dccf926b1b3ee6a06b6638689ade67adab4e4b25b1ee"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "choice",
+          "title": "Escolhas e controle",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "choice.mechanism",
+              "dimension_id": "choice",
+              "title": "Procedimento para exercer uma escolha",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "choice.mechanism",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "affected_processing",
+                "locatable_procedure"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "choice.mechanism",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:9e7a1d87657e2a5def0ca92c51fa0d8caa5611820cae1487a598005f783f7bf0"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:715d4d3105499965ad569bf61a1a66c0f47b7bdacb98aaf248c53ae929140931"
+              ]
+            },
+            {
+              "id": "choice.channel",
+              "dimension_id": "choice",
+              "title": "Canal localizável para escolhas",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "choice.channel",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "choice",
+                "locatable_channel"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "choice.channel",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:c2f5b1f9f00b8371d148001c065fb2888b88a7c9e6728e5fb19a995bd64ddcd8"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:7ada03ea4d9cff9a6d60f04541e0d6601fda626a0dbd253f39e3a0077d4ea8c0"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "access",
+          "title": "Direitos e solicitações",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "access.channel",
+              "dimension_id": "access",
+              "title": "Canal de solicitação de direitos",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "access.channel",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "identified_request",
+                "locatable_channel"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "access.channel",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:8c40e3d129b83d48473f44297c59bd07f95ae74731b9d70cc088c5abec7aa84b"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:00f90465942a9bde44ddc73064fbcc57b4631d62c6ce676bfab85e8f0a1c2149"
+              ]
+            },
+            {
+              "id": "access.response_time",
+              "dimension_id": "access",
+              "title": "Prazo de resposta e marco inicial",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "access.response_time",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "identified_request",
+                "response_duration_and_unit",
+                "start_event"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "access.response_time",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:861ed96875f3107008e33809a8deab19b02d03811b064dd0e1303f5caf52fc2b"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:e6eb64272a236ca69793d45fd35896ece2f58053c9c0ece45645ade5a8c5c788"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Retenção",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "retention.duration",
+              "dimension_id": "retention",
+              "title": "Duração ou evento de retenção",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "retention.duration",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "data_class",
+                "duration_or_event"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "retention.duration",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:d558f2372c87b64e9a628fccf35e2a6924cc29889f50fd60741a30fc7d109599"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:4ee4ce53dc1fa04da9b73af57430e7644017937b3d13736f6d396707b327d770"
+              ]
+            },
+            {
+              "id": "retention.disposal",
+              "dimension_id": "retention",
+              "title": "Destinação ao final da retenção",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "retention.disposal",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "data_class",
+                "end_event",
+                "disposition"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "retention.disposal",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:6a82c973c83e39a2fd2fdd8b576788c15733dbe67750fd92fd6c0b69f1d84548"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:7f4568695dcba6aa0ef074dbb8d67db836182c15b72df29cd2e38386c008cdb5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "security",
+          "title": "Segurança",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "security.technical_measures",
+              "dimension_id": "security",
+              "title": "Medida técnica e contexto de proteção",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "security.technical_measures",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "specific_measure",
+                "data_or_protection_context"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "security.technical_measures",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:11c164275e2b4d1126cb609d4ac70100280cc59d3b1a7b0a261c40dc88054197"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:0dbdda9b8e3849e626d3b1d737de3c78e6bc7675998a0c3287c72dc972c2d0f6"
+              ]
+            },
+            {
+              "id": "security.access_controls",
+              "dimension_id": "security",
+              "title": "Controle de acesso, ator e recurso",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "security.access_controls",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "specific_access_control",
+                "actor",
+                "resource"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "security.access_controls",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:438b348fb83aba963871e9fb2a2db98bdcabc03c9df3841be1c5d5a011368ffa"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:e8f84e56c40253166579e8eaed88e07de5cca8e7aab1cb97d22d46aae3bca046"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Alterações da política",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "changes.notice_channel",
+              "dimension_id": "changes",
+              "title": "Canal de aviso de mudanças",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "changes.notice_channel",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "policy_change",
+                "identified_notice_channel"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "changes.notice_channel",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:0914d663180ec7b197aca8c8ad504dd51f0a10efb4f8b9878181145d7cde6dbf"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:39770c937f5b9244db1a9fe4ddf3394907ea7538d165c4a705a3771959d4bbdf"
+              ]
+            },
+            {
+              "id": "changes.notice_timing",
+              "dimension_id": "changes",
+              "title": "Momento do aviso de mudanças",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "core-14-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-09-27T00:00:00Z"
+              },
+              "rule_id": "changes.notice_timing",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "policy_change_notice",
+                "timing_and_event"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 39,
+                      "quote": "Informações dependem de esclarecimento."
+                    }
+                  ],
+                  "polarity": "uncertain",
+                  "detection_source": "rule_only",
+                  "rule_id": "changes.notice_timing",
+                  "rule_version": "governance-rules-v4-dev1",
+                  "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+                  "id": "evidence:2cff2f9ed25abc9da965bf9bc659430f4e80487d6f5aa9df6f8b62019e496f51"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:4f93211afe43a5db29ee045954ad2c1846b01be5a208d7350fabbbd86284a35a"
+              ]
+            }
+          ]
+        }
+      ],
+      "findings": [
+        {
+          "id": "finding:0f02983dc354645c58d170fa0e732fc170e04787e60464203eac495a6cc124ab",
+          "dimension_id": "collection",
+          "question_id": "collection.data_types",
+          "rule_id": "collection.data_types",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Tipos de dados coletados ou usados",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:1309cea90a876e0dd2c1738bda1b099461ceb7a1722bf00cfafbea1ed066e241"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-2dfee9c7f82be4ca2bc0d186"
+          ]
+        },
+        {
+          "id": "finding:2c52b2b64bcd864fcbf831d24177af90c48afa0f3e33814cc4101829cebccd83",
+          "dimension_id": "collection",
+          "question_id": "collection.purposes",
+          "rule_id": "collection.purposes",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Relação entre dado e finalidade",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:28ef0cc30cbbedab1aa88703ba47282a38daf4d0130f33c536e5b60a547d6972"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-aa3f106579a7f6ec42d392f9"
+          ]
+        },
+        {
+          "id": "finding:1884e15fd489be0ef9a3d4956f0b5c9de39ca1ada1a2996fed77810d7bf76860",
+          "dimension_id": "sharing",
+          "question_id": "sharing.recipients",
+          "rule_id": "sharing.recipients",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Destinatários do compartilhamento",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "sharing.recipients",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:b8203b3f3cd4dd8a96b329fa7ba3e4f897c43b898389f7a9c5bbb73bf2762d13"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-cdbd4d1d12c54eac97c41097"
+          ]
+        },
+        {
+          "id": "finding:72987aaaa12aa1e570a9dccf926b1b3ee6a06b6638689ade67adab4e4b25b1ee",
+          "dimension_id": "sharing",
+          "question_id": "sharing.conditions",
+          "rule_id": "sharing.conditions",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Condições do compartilhamento",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "sharing.conditions",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:50dbab6462d9f90b0312b3065d9cd2dc0a0001ac3d47247dc4fa9fb3792d196d"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-c9af09d906bb30595a0a9bbb"
+          ]
+        },
+        {
+          "id": "finding:715d4d3105499965ad569bf61a1a66c0f47b7bdacb98aaf248c53ae929140931",
+          "dimension_id": "choice",
+          "question_id": "choice.mechanism",
+          "rule_id": "choice.mechanism",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Procedimento para exercer uma escolha",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "choice.mechanism",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:9e7a1d87657e2a5def0ca92c51fa0d8caa5611820cae1487a598005f783f7bf0"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-d8fa4b70e7097da5375f0e21"
+          ]
+        },
+        {
+          "id": "finding:7ada03ea4d9cff9a6d60f04541e0d6601fda626a0dbd253f39e3a0077d4ea8c0",
+          "dimension_id": "choice",
+          "question_id": "choice.channel",
+          "rule_id": "choice.channel",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Canal localizável para escolhas",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "choice.channel",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:c2f5b1f9f00b8371d148001c065fb2888b88a7c9e6728e5fb19a995bd64ddcd8"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-b26d38c94578d685a53885b4"
+          ]
+        },
+        {
+          "id": "finding:00f90465942a9bde44ddc73064fbcc57b4631d62c6ce676bfab85e8f0a1c2149",
+          "dimension_id": "access",
+          "question_id": "access.channel",
+          "rule_id": "access.channel",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Canal de solicitação de direitos",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "access.channel",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:8c40e3d129b83d48473f44297c59bd07f95ae74731b9d70cc088c5abec7aa84b"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-88df8b67b9a3a84fb6e39d2f"
+          ]
+        },
+        {
+          "id": "finding:e6eb64272a236ca69793d45fd35896ece2f58053c9c0ece45645ade5a8c5c788",
+          "dimension_id": "access",
+          "question_id": "access.response_time",
+          "rule_id": "access.response_time",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Prazo de resposta e marco inicial",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "access.response_time",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:861ed96875f3107008e33809a8deab19b02d03811b064dd0e1303f5caf52fc2b"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-a9ca3094504f0a716a751481"
+          ]
+        },
+        {
+          "id": "finding:4ee4ce53dc1fa04da9b73af57430e7644017937b3d13736f6d396707b327d770",
+          "dimension_id": "retention",
+          "question_id": "retention.duration",
+          "rule_id": "retention.duration",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Duração ou evento de retenção",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "retention.duration",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:d558f2372c87b64e9a628fccf35e2a6924cc29889f50fd60741a30fc7d109599"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-0c3573895884ba4e197313f1"
+          ]
+        },
+        {
+          "id": "finding:7f4568695dcba6aa0ef074dbb8d67db836182c15b72df29cd2e38386c008cdb5",
+          "dimension_id": "retention",
+          "question_id": "retention.disposal",
+          "rule_id": "retention.disposal",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Destinação ao final da retenção",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "retention.disposal",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:6a82c973c83e39a2fd2fdd8b576788c15733dbe67750fd92fd6c0b69f1d84548"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-c56fe3d6a950c2f5bf4a7362"
+          ]
+        },
+        {
+          "id": "finding:0dbdda9b8e3849e626d3b1d737de3c78e6bc7675998a0c3287c72dc972c2d0f6",
+          "dimension_id": "security",
+          "question_id": "security.technical_measures",
+          "rule_id": "security.technical_measures",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Medida técnica e contexto de proteção",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "security.technical_measures",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:11c164275e2b4d1126cb609d4ac70100280cc59d3b1a7b0a261c40dc88054197"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-f0abf233e009b63e4e7bc6d1"
+          ]
+        },
+        {
+          "id": "finding:e8f84e56c40253166579e8eaed88e07de5cca8e7aab1cb97d22d46aae3bca046",
+          "dimension_id": "security",
+          "question_id": "security.access_controls",
+          "rule_id": "security.access_controls",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Controle de acesso, ator e recurso",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "security.access_controls",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:438b348fb83aba963871e9fb2a2db98bdcabc03c9df3841be1c5d5a011368ffa"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-faba79059ce54e49ae94e658"
+          ]
+        },
+        {
+          "id": "finding:39770c937f5b9244db1a9fe4ddf3394907ea7538d165c4a705a3771959d4bbdf",
+          "dimension_id": "changes",
+          "question_id": "changes.notice_channel",
+          "rule_id": "changes.notice_channel",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Canal de aviso de mudanças",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "changes.notice_channel",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:0914d663180ec7b197aca8c8ad504dd51f0a10efb4f8b9878181145d7cde6dbf"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-400716aa9e267cb34cafedb3"
+          ]
+        },
+        {
+          "id": "finding:4f93211afe43a5db29ee045954ad2c1846b01be5a208d7350fabbbd86284a35a",
+          "dimension_id": "changes",
+          "question_id": "changes.notice_timing",
+          "rule_id": "changes.notice_timing",
+          "rule_version": "governance-rules-v4-dev1",
+          "kind": "ambiguity",
+          "title": "Momento do aviso de mudanças",
+          "rationale": "Referência ou exceção não resolvida.",
+          "priority": "medium",
+          "priority_reason": "Conferir informação documental insuficiente ou ambígua.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 39,
+                  "quote": "Informações dependem de esclarecimento."
+                }
+              ],
+              "polarity": "uncertain",
+              "detection_source": "rule_only",
+              "rule_id": "changes.notice_timing",
+              "rule_version": "governance-rules-v4-dev1",
+              "rationale": "Referência, exceção ou qualificador não resolvido; requer leitura humana.",
+              "id": "evidence:2cff2f9ed25abc9da965bf9bc659430f4e80487d6f5aa9df6f8b62019e496f51"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-0de545ac55b5e5c1612b3ae3"
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-88df8b67b9a3a84fb6e39d2f",
+          "template_id": "review.clarify.access.channel",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:00f90465942a9bde44ddc73064fbcc57b4631d62c6ce676bfab85e8f0a1c2149"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Canal de solicitação de direitos: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-a9ca3094504f0a716a751481",
+          "template_id": "review.clarify.access.response_time",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:e6eb64272a236ca69793d45fd35896ece2f58053c9c0ece45645ade5a8c5c788"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Prazo de resposta e marco inicial: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-400716aa9e267cb34cafedb3",
+          "template_id": "review.clarify.changes.notice_channel",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:39770c937f5b9244db1a9fe4ddf3394907ea7538d165c4a705a3771959d4bbdf"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Canal de aviso de mudanças: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-0de545ac55b5e5c1612b3ae3",
+          "template_id": "review.clarify.changes.notice_timing",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:4f93211afe43a5db29ee045954ad2c1846b01be5a208d7350fabbbd86284a35a"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Momento do aviso de mudanças: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-b26d38c94578d685a53885b4",
+          "template_id": "review.clarify.choice.channel",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:7ada03ea4d9cff9a6d60f04541e0d6601fda626a0dbd253f39e3a0077d4ea8c0"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Canal localizável para escolhas: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-d8fa4b70e7097da5375f0e21",
+          "template_id": "review.clarify.choice.mechanism",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:715d4d3105499965ad569bf61a1a66c0f47b7bdacb98aaf248c53ae929140931"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Procedimento para exercer uma escolha: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-2dfee9c7f82be4ca2bc0d186",
+          "template_id": "review.clarify.collection.data_types",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:0f02983dc354645c58d170fa0e732fc170e04787e60464203eac495a6cc124ab"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Tipos de dados coletados ou usados: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-aa3f106579a7f6ec42d392f9",
+          "template_id": "review.clarify.collection.purposes",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:2c52b2b64bcd864fcbf831d24177af90c48afa0f3e33814cc4101829cebccd83"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Relação entre dado e finalidade: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-c56fe3d6a950c2f5bf4a7362",
+          "template_id": "review.clarify.retention.disposal",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:7f4568695dcba6aa0ef074dbb8d67db836182c15b72df29cd2e38386c008cdb5"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Destinação ao final da retenção: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-0c3573895884ba4e197313f1",
+          "template_id": "review.clarify.retention.duration",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:4ee4ce53dc1fa04da9b73af57430e7644017937b3d13736f6d396707b327d770"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Duração ou evento de retenção: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-faba79059ce54e49ae94e658",
+          "template_id": "review.clarify.security.access_controls",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:e8f84e56c40253166579e8eaed88e07de5cca8e7aab1cb97d22d46aae3bca046"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Controle de acesso, ator e recurso: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-f0abf233e009b63e4e7bc6d1",
+          "template_id": "review.clarify.security.technical_measures",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:0dbdda9b8e3849e626d3b1d737de3c78e6bc7675998a0c3287c72dc972c2d0f6"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Medida técnica e contexto de proteção: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-c9af09d906bb30595a0a9bbb",
+          "template_id": "review.clarify.sharing.conditions",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:72987aaaa12aa1e570a9dccf926b1b3ee6a06b6638689ade67adab4e4b25b1ee"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Condições do compartilhamento: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-cdbd4d1d12c54eac97c41097",
+          "template_id": "review.clarify.sharing.recipients",
+          "catalog_version": "governance-recommendations-v4-dev1:ec8b308ef474d3d97c950f991b02abe7969166b93f713d14c51cc92d783978e7",
+          "finding_ids": [
+            "finding:1884e15fd489be0ef9a3d4956f0b5c9de39ca1ada1a2996fed77810d7bf76860"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Destinatários do compartilhamento: Referência ou exceção não resolvida.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Critérios documentais e agregação com exclusão de dúvidas — R9",
+              "edition": "documentary-quality-v4-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R9_CALCULO_SEM_BLOQUEIO_POR_DUVIDAS.md",
+              "source_sha256": "55b3892a71285620f906946b56e74b4e500a5e780cf94328b73aca9a034bfad2",
+              "source_locator": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "control_role": "project",
+              "summary": "Revisar ambiguidades e limitações da entrada antes de concluir sobre o conteúdo da política."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "medium",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Conferir informação documental insuficiente ou ambígua.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        }
+      ],
+      "limitations": [
+        "Avaliação documental experimental; não mede conformidade, proteção efetiva ou maturidade.",
+        "Heurísticas lexicais contextuais, sem compreensão semântica geral; revisão humana necessária.",
+        "Satisfação de uma pergunta indica ao menos uma relação encontrada, não um inventário exaustivo.",
+        "Conflitos reconhecidos são candidatos; variações de sujeito, escopo e exceções podem escapar.",
+        "Sem texto extraído e offsets, relações entre segmentos não são reconstruídas.",
+        "Recomendações de desenvolvimento: guias da planilha conferidos, sem conferência do texto integral da ISO e sem revisão técnica humana independente. Não comprovam atendimento aos controles."
+      ]
+    }
+  }
+}
