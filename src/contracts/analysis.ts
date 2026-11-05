@@ -7,7 +7,7 @@ export { errorResponseSchema } from './analysis.shared.js';
 const id = z.string().min(1);
 const hash = z.string().regex(/^[a-f0-9]{64}$/);
 const count = z.number().int().nonnegative();
-const score = z.number().int().min(0).max(3);
+const score = z.number().min(0).max(3);
 const contribution = z.number().min(0).max(3);
 const fraction = z.number().min(0).max(1);
 const catalogVersion = z.string().regex(/^[a-z0-9-]+:[a-f0-9]{64}$/);
@@ -129,7 +129,7 @@ const finding = z.strictObject({
   recommendation_ids: z.array(id),
 });
 export const evaluationSchema = z.strictObject({
-  score_scale: z.literal('ordinal_0_3'),
+  score_scale: z.enum(['ordinal_0_3', 'continuous_0_3']),
   score_conversion: z.literal('percentage_to_ordinal_v1').optional(),
   schema_version: z.literal(2),
   policy_id: id,
@@ -152,6 +152,12 @@ export const evaluationSchema = z.strictObject({
   findings: z.array(finding),
   recommendations: z.array(recommendation),
   limitations: z.array(z.string()),
+}).superRefine((evaluation, ctx) => {
+  if (evaluation.score_scale === 'ordinal_0_3' && [evaluation.score, ...evaluation.dimensions.map(d => d.score)]
+    .some(value => value !== null && !Number.isInteger(value)))
+    ctx.addIssue({ code: 'custom', message: 'A escala histórica exige notas inteiras.' });
+  if (evaluation.score_scale === 'continuous_0_3' && evaluation.score_conversion !== undefined)
+    ctx.addIssue({ code: 'custom', message: 'Conversão histórica não se aplica à escala contínua.' });
 });
 export const versionsSchema = baseVersionsSchema.extend({ recommendations: catalogVersion.nullable() }).strict();
 
@@ -194,12 +200,14 @@ export const analysisResultSchema = z.strictObject({
   if (findings.size !== evaluation.findings.length) fail('Achados duplicados.');
   /** Confere as notas da avaliação, sem arredondar nem mudar a ordem das somas. */
   function checkScores() {
+    const grade = (percentage: number) => evaluation.score_scale === 'continuous_0_3'
+      ? percentage * 3 / 100 : classifyPercentage(percentage);
     const weights = evaluation.dimensions.reduce((sum, d) => sum + d.weight, 0);
     for (const d of evaluation.dimensions) {
       if (d.questions.length !== 2 || d.questions.some(q => q.dimension_id !== d.id || !q.id.startsWith(d.id + '.'))) fail('Perguntas em dimensão incorreta.');
       const resolved = d.questions.filter(q => q.value !== null).length;
       const points = d.questions.reduce((sum, q) => sum + (q.value ?? 0), 0);
-      const expected = resolved === 2 && usableSegmentCount ? classifyPercentage(points * 50) : null;
+      const expected = resolved === 2 && usableSegmentCount ? grade(points * 50) : null;
       if (d.applicable_questions !== 2 || d.unknown_applicability_questions !== 0 || d.excluded_questions !== 0 ||
         d.resolved_questions !== resolved || d.inconclusive_questions !== 2 - resolved || !sameNumber(d.earned_points, points) ||
         !sameNumber(d.score, expected) || !sameNumber(d.normalized_weight, d.weight / weights) ||
@@ -207,7 +215,7 @@ export const analysisResultSchema = z.strictObject({
         !sameNumber(d.contribution, blockers.length ? null : points / 2 * 3 * d.weight / weights)) fail('Memória de cálculo inconsistente.');
     }
     const percentage = evaluation.dimensions.reduce((sum, d) => sum + 50 * d.earned_points * d.weight / weights, 0);
-    if (!sameNumber(evaluation.score, blockers.length ? null : classifyPercentage(Math.min(100, percentage)))) fail('Nota global inconsistente.');
+    if (!sameNumber(evaluation.score, blockers.length ? null : grade(Math.min(100, percentage)))) fail('Nota global inconsistente.');
   }
   checkScores();
   const checkScope = (s: z.infer<typeof search>) => {

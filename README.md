@@ -1,5 +1,7 @@
 # Backend do protótipo
 
+**R7/R8:** compatibilidade com notas contínuas e histórico validada localmente, incluindo modelo Python e PostgreSQL reais. A publicação da revisão está suspensa pelas falhas de reconhecimento da [R7](../docs/R7_REVALIDACAO_NOTAS.md). Ver [entrega e limites da R8](../docs/R8_CONSOLIDACAO_ENTREGA.md).
+
 O projeto usa um único método de avaliação da qualidade da informação documentada, com notas de **0 a 3**. Consulte [a atualização do método](../docs/AVALIACAO_UNIFICADA.md).
 
 Node 22.17, TypeScript, Express e PostgreSQL/Prisma. Consulte o [guia da raiz](../README.md) para instalação e o [procedimento do banco](../docs/BANCO.md) antes de migrations.
