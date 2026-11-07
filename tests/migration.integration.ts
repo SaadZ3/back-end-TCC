@@ -59,5 +59,18 @@ test('migrations preservam registros anteriores e adotam o método atual como pa
     await client.query('SAVEPOINT unknown_profile');
     await assert.rejects(client.query("UPDATE policy_analyses SET profile_id='unknown' WHERE id='r10'"));
     await client.query('ROLLBACK TO SAVEPOINT unknown_profile');
+    const beforeSelection = (await client.query('SELECT * FROM policy_analyses ORDER BY id')).rows;
+    const selectionSql = await readFile(path.join(__dirname, '../prisma/migrations/20261106000200_assessment_scope/migration.sql'), 'utf8');
+    await client.query(selectionSql.replace(/^BEGIN;|^COMMIT;/gm, ''));
+    const afterSelection = (await client.query('SELECT * FROM policy_analyses ORDER BY id')).rows;
+    for (let i=0;i<beforeSelection.length;i++) {
+      const {assessment_scope,...rest}=afterSelection[i];
+      assert.equal(assessment_scope,null);assert.deepEqual(rest,beforeSelection[i]);
+    }
+    await client.query(`INSERT INTO policy_analyses (id,user_id,original_filename,storage_key,file_sha256,byte_size,document_scope,updated_at,result_schema_version,profile_id,assessment_scope)
+      VALUES ('r11','owner','r11.txt','r11.txt','hash',4,'full_document',NOW(),3,'documentary-18-v1','{"mode":"selected_categories","category_ids":["security"]}')`);
+    await client.query('SAVEPOINT missing_selection');
+    await assert.rejects(client.query("UPDATE policy_analyses SET assessment_scope=NULL WHERE id='r11'"));
+    await client.query('ROLLBACK TO SAVEPOINT missing_selection');
   } finally { await client.query('ROLLBACK'); await client.end(); }
 });

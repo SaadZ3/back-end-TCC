@@ -1,0 +1,5 @@
+Usamos TLS para proteger os dados pessoais durante a transmissão.
+
+Funcionários acessam os registros de clientes somente após autenticação de múltiplos fatores.
+
+Guardamos dados pessoais.

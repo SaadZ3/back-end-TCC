@@ -1,0 +1,352 @@
+{
+  "schema_version": 3,
+  "versions": {
+    "model": "synthetic-labels-not-model-inference",
+    "preprocessing": "synthetic-fixture",
+    "scoring": "governance-rules-v5-dev1:cd0ad6a7b23c6b8ac86f5f17d36fe3c67610dc281c90a9be33f43e3065d51d8e",
+    "recommendations": "governance-recommendations-v5-dev1:80ff9202da7640d821cda532a496b912021e1035cee2976b0ab82e6bddf022ca"
+  },
+  "result": {
+    "document_scope": "full_document",
+    "source": {
+      "filename": "exemplo-r11.txt",
+      "format": "txt",
+      "byte_size": 193,
+      "sha256": "6c14e2b70a22c3f3f4f09a73dc8e7deaa57e9b04cf70de3a465d6343b06529a9"
+    },
+    "preprocessing": {
+      "version": "synthetic-fixture-not-inference",
+      "max_length": 512,
+      "tokenizer_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "extraction": {
+      "status": "ok",
+      "warnings": [],
+      "text": "Usamos TLS para proteger os dados pessoais durante a transmissão.\n\nFuncionários acessam os registros de clientes somente após autenticação de múltiplos fatores.\n\nGuardamos dados pessoais.",
+      "page_count": null,
+      "pages": [
+        {
+          "page_number": null,
+          "char_start": 0,
+          "char_end": 187,
+          "status": "ok"
+        }
+      ]
+    },
+    "segments": [
+      {
+        "segment_id": "s0",
+        "text": "Usamos TLS para proteger os dados pessoais durante a transmissão.\n\nFuncionários acessam os registros de clientes somente após autenticação de múltiplos fatores.\n\nGuardamos dados pessoais.",
+        "char_start": 0,
+        "char_end": 187,
+        "page_start": null,
+        "page_end": null,
+        "labels": [
+          "Other"
+        ],
+        "n_tokens": 90,
+        "probabilities": {
+          "First Party Collection/Use": 0.01,
+          "Third Party Sharing/Collection": 0.01,
+          "User Choice/Control": 0.01,
+          "User Access, Edit and Deletion": 0.01,
+          "Data Retention": 0.01,
+          "Data Security": 0.01,
+          "Policy Change": 0.01,
+          "Do Not Track": 0.01,
+          "International and Specific Audiences": 0.01,
+          "Other": 0.99
+        },
+        "truncated": false
+      }
+    ],
+    "evaluation": {
+      "schema_version": 3,
+      "assessment_scope": {
+        "mode": "selected_categories",
+        "category_ids": [
+          "security"
+        ]
+      },
+      "policy_id": "6c14e2b70a22c3f3f4f09a73dc8e7deaa57e9b04cf70de3a465d6343b06529a9",
+      "language": "pt",
+      "uncertainty_policy": "exclude_inconclusive_evidence_v1",
+      "index": "documentary_information_quality",
+      "method_version": "documentary-quality-v5-draft1",
+      "score_scale": "continuous_0_3",
+      "profile_id": "documentary-18-v1",
+      "profile_sha256": "74da7425a640448efc374fdde09c7dc2b78660e5fd3fd116af976ddda847485e",
+      "validation_status": "not_human_validated",
+      "input_status": "complete_input",
+      "score_status": "available",
+      "score": 3.0,
+      "score_blockers": [],
+      "rules_version": "governance-rules-v5-dev1",
+      "rules_sha256": "291c6186cc703a73f20ca49920dd7f4a14b1da928f182a6ec79e700a470c97ee",
+      "predictions_sha256": "a3477283041812232c6bd196cc90c4d975f6ac719a5787f2187fba7a20ba71ed",
+      "fallback_enabled": true,
+      "dimensions": [
+        {
+          "id": "collection",
+          "title": "Coleta e uso",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "sharing",
+          "title": "Compartilhamento",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "choice",
+          "title": "Escolhas e controle",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "access",
+          "title": "Direitos e solicitações",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "retention",
+          "title": "Retenção",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "security",
+          "title": "Segurança",
+          "weight": 1,
+          "normalized_weight": 1.0,
+          "status": "resolved",
+          "score": 3.0,
+          "contribution": 3.0,
+          "earned_points": 2.0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "security.technical_measures",
+              "dimension_id": "security",
+              "title": "Medida técnica e contexto de proteção",
+              "status": "supported",
+              "value": 1.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "documentary-18-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-11-05T00:00:00Z"
+              },
+              "rule_id": "security.technical_measures",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Elementos exigidos encontrados em uma relação contextual.",
+              "found_elements": [
+                "data_or_protection_context",
+                "specific_measure"
+              ],
+              "missing_elements": [],
+              "supporting_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 65,
+                      "quote": "Usamos TLS para proteger os dados pessoais durante a transmissão."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "security.technical_measures",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:6b95c0cbce9573b8ef16b7eae84f3db307ae3b2170841b76f79d91d009a0f728"
+                }
+              ],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": []
+            },
+            {
+              "id": "security.access_controls",
+              "dimension_id": "security",
+              "title": "Controle de acesso, ator e recurso",
+              "status": "supported",
+              "value": 1.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "documentary-18-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-11-05T00:00:00Z"
+              },
+              "rule_id": "security.access_controls",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Elementos exigidos encontrados em uma relação contextual.",
+              "found_elements": [
+                "actor",
+                "resource",
+                "specific_access_control"
+              ],
+              "missing_elements": [],
+              "supporting_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 67,
+                      "end": 160,
+                      "quote": "Funcionários acessam os registros de clientes somente após autenticação de múltiplos fatores."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "security.access_controls",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:0199be7c53309ef27defc8c1a1b015aba522e0ff327ca10e55e98d29cb141768"
+                }
+              ],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": []
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Alterações da política",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "dnt",
+          "title": "Não rastreamento — sinais DNT",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "audiences",
+          "title": "Públicos específicos e contexto internacional",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        }
+      ],
+      "findings": [],
+      "recommendations": [],
+      "limitations": [
+        "Avaliação documental experimental; não mede conformidade, proteção efetiva ou maturidade.",
+        "Heurísticas lexicais contextuais, sem compreensão semântica geral; revisão humana necessária.",
+        "Satisfação de uma pergunta indica ao menos uma relação encontrada, não um inventário exaustivo.",
+        "Conflitos reconhecidos são candidatos; variações de sujeito, escopo e exceções podem escapar.",
+        "Sem texto extraído e offsets, relações entre segmentos não são reconstruídas.",
+        "Recomendações de desenvolvimento: guias da planilha conferidos, sem conferência do texto integral da ISO e sem revisão técnica humana independente. Não comprovam atendimento aos controles."
+      ]
+    }
+  }
+}

@@ -1,4 +1,5 @@
 /** Envia o documento ao Python e confere a resposta antes de persistir. */
+import type { AssessmentScope } from '../../contracts/assessmentScope.js';
 import { createHash } from 'node:crypto';
 import { env } from '../../config/env.js';
 import { inferenceResponseSchema, errorResponseSchema } from '../../contracts/analysis.js';
@@ -25,12 +26,13 @@ function containsNullCharacter(value: unknown): boolean {
 }
 
 /** Recebe arquivo e escopo; retorna a análise validada do Python ou um erro público. */
-export async function infer(file: Express.Multer.File, scope: string) {
+export async function infer(file: Express.Multer.File, scope: string, selection?: AssessmentScope) {
   const signal = AbortSignal.timeout(env.INFERENCE_TIMEOUT_MS);
   const data = new FormData();
   data.append('file', new Blob([new Uint8Array(file.buffer)]), file.originalname);
   data.append('language', 'pt');
   data.append('document_scope', scope);
+  if (selection) data.append('assessment_scope', JSON.stringify(selection));
   let receivedResponse = false;
   try {
     const response = await fetch(new URL('/analyze', env.INFERENCE_URL), {
@@ -68,6 +70,8 @@ export async function infer(file: Express.Multer.File, scope: string) {
     if (parsed.result.document_scope !== scope ||
       parsed.result.source?.sha256 !== createHash('sha256').update(file.buffer).digest('hex') ||
       parsed.result.source.byte_size !== file.size) throw new Error('Mismatched source');
+    if (selection && (parsed.schema_version !== 3 || JSON.stringify(parsed.result.evaluation.assessment_scope) !== JSON.stringify(selection)))
+      throw new Error('Mismatched assessment scope');
     return parsed;
   } catch (error) {
     if (signal.aborted) throw new AnalysisError('ANALYSIS_TIMEOUT', 'O serviço de análise excedeu o tempo limite.', 504);

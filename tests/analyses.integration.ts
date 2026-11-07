@@ -38,7 +38,7 @@ async function listen(app: express.Express) {
   assert.ok(address && typeof address === 'object');
   return { listener, url: 'http://127.0.0.1:' + address.port };
 }
-function upload(options: { name?: string; data?: string | Uint8Array; scope?: string; cookie?: string; extra?: boolean; previous?: string; profile?: string } = {}) {
+function upload(options: { name?: string; data?: string | Uint8Array; scope?: string; cookie?: string; extra?: boolean; previous?: string; profile?: string; selection?: unknown } = {}) {
   const body = new FormData();
   body.append('file', new Blob([typeof options.data === 'string' ? options.data : new Uint8Array(options.data ?? Buffer.from(content))]),
     options.name ?? 'politica.txt');
@@ -46,6 +46,7 @@ function upload(options: { name?: string; data?: string | Uint8Array; scope?: st
   body.append('document_scope', options.scope ?? 'full_document');
   if (options.extra) body.append('user_id', otherId);
   if (options.profile) body.append('profile_id', options.profile);
+  if (options.selection !== undefined) body.append('assessment_scope', JSON.stringify(options.selection));
   if (options.previous) body.append('supersedes_analysis_id', options.previous);
   return fetch(base + '/api/analyses', { method: 'POST', body,
     headers: { Origin: origin, Cookie: options.cookie ?? cookie } });
@@ -65,8 +66,11 @@ before(async () => {
     if (mode === 'unavailable') { res.status(503).json({ error: { code: 'INFERENCE_UNAVAILABLE', message: 'Serviço ocupado.' } }); return; }
     if (mode === 'invalid') { res.json({ unexpected: true }); return; }
     if (mode === 'ocr') { res.status(422).json({ error: { code: 'OCR_REQUIRED', message: 'O PDF precisa de OCR.' } }); return; }
-    const result = JSON.parse(await readFile(path.join(__dirname, 'fixtures/e4',
-      req.body.document_scope === 'full_document' ? 'complete.json' : 'partial.json'), 'utf8'));
+    const selection = JSON.parse(req.body.assessment_scope);
+    const selected = selection.mode === 'selected_categories' && mode !== 'ignore_selection';
+    const fixture = selected ? selection.category_ids.length === 1 ? 'one' : 'two'
+      : req.body.document_scope === 'full_document' ? 'complete' : 'partial';
+    const result = JSON.parse(await readFile(path.join(__dirname, 'fixtures/r11', fixture + '.json'), 'utf8'));
     result.result.source.sha256 = mode === 'wrong_source' ? '0'.repeat(64) : createHash('sha256').update(req.file!.buffer).digest('hex');
     result.result.source.byte_size = req.file!.size;
     result.result.document_scope = req.body.document_scope;
@@ -258,11 +262,11 @@ test('salva cálculo e evidências; reanálise mantém resultado anterior imutá
   const body = await response.json();
   assert.equal(response.status, 201, JSON.stringify(body));
   revisedId = body.analysis_id;
-  assert.equal(body.schema_version, 2);
-  assert.equal(body.profile_id, 'core-14-v1');
+  assert.equal(body.schema_version, 3);
+  assert.equal(body.profile_id, 'documentary-18-v1');
   assert.equal(body.supersedes_analysis_id, successfulId);
   const row = await prisma.policyAnalysis.findUniqueOrThrow({ where: { id: revisedId } });
-  assert.equal(row.result_schema_version, 2);
+  assert.equal(row.result_schema_version, 3);
   assert.deepEqual(row.result, body.result);
   assert.deepEqual(row.versions, body.versions);
   assert.deepEqual(await (await get('/'+revisedId, cookie)).json(), body);
@@ -270,10 +274,33 @@ test('salva cálculo e evidências; reanálise mantém resultado anterior imutá
   assert.equal((await get('/'+successfulId, cookie)).status, 200);
   assert.equal(await (await get('/'+revisedId+'/file', cookie)).text(), content);
 });
+
+test('R11 salva seleção antes da inferência e não aceita resposta que ignore a escolha', async()=>{
+  const selection={mode:'selected_categories',category_ids:['retention','security']};
+  const response=await upload({selection});const value=await response.json();
+  assert.equal(response.status,201,JSON.stringify(value));
+  assert.equal(value.result.evaluation.score,1.875);
+  assert.deepEqual(value.assessment_scope,selection);
+  assert.deepEqual((await prisma.policyAnalysis.findUniqueOrThrow({where:{id:value.analysis_id}})).assessment_scope,selection);
+  assert.deepEqual((await (await get('/'+value.analysis_id)).json()).assessment_scope,selection);
+  const history=await (await get('')).json();
+  assert.deepEqual(history.items.find((item:any)=>item.analysis_id===value.analysis_id).assessment_scope,selection);
+  mode='ignore_selection';
+  try {
+    const rejected=await upload({selection});const failure=await rejected.json();
+    assert.equal(rejected.status,503);
+    const saved=await (await get('/'+failure.analysis_id)).json();
+    assert.equal(saved.status,'failed');assert.deepEqual(saved.assessment_scope,selection);
+  } finally {mode='ok';}
+  const before=calls;
+  for(const ids of [[],['Other'],['security','security']])
+    assert.equal((await upload({selection:{mode:'selected_categories',category_ids:ids}})).status,400);
+  assert.equal(calls,before);
+});
 test('filtra histórico legado, protege origem e arquivo por proprietário', async () => {
   const all = await (await get('', cookie)).json();
-  assert.ok(all.items.some((x: { schema_version: number }) => x.schema_version === 2));
-  assert.ok(all.items.every((x: { schema_version: number }) => x.schema_version === 2));
+  assert.ok(all.items.some((x: { schema_version: number }) => [2,3].includes(x.schema_version)));
+  assert.ok(all.items.every((x: { schema_version: number }) => [2,3].includes(x.schema_version)));
   for (const suffix of ['/'+revisedId, '/'+revisedId+'/file']) assert.equal((await get(suffix, otherCookie)).status, 404);
   const before = await prisma.policyAnalysis.count({ where: { user_id: otherId } });
   assert.equal((await upload({ previous: successfulId, cookie: otherCookie })).status, 404);
@@ -302,7 +329,7 @@ test('mantém parcial nulo, versão em falhas e processamento', async () => {
   try {
     const failed = await (await upload({})).json();
     const saved = await (await get('/'+failed.analysis_id, cookie)).json();
-    assert.equal(saved.schema_version, 2); assert.equal(saved.status, 'failed');
+    assert.equal(saved.schema_version, 3); assert.equal(saved.status, 'failed');
   } finally { mode = 'ok'; }
   mode = 'blocked'; release = undefined;
   const pending = upload({});
@@ -312,7 +339,7 @@ test('mantém parcial nulo, versão em falhas e processamento', async () => {
     const row = await prisma.policyAnalysis.findFirstOrThrow({ where: { user_id: ownerId, status:'processing' } });
     assert.equal((await fetch(base + '/api/analyses/' + row.id, { method: 'DELETE', headers: { Origin: origin, Cookie: cookie } })).status, 409);
     const saved = await (await get('/'+row.id, cookie)).json();
-    assert.equal(saved.schema_version, 2); assert.equal(saved.profile_id, 'documentary-18-v1');
+    assert.equal(saved.schema_version, 3); assert.equal(saved.profile_id, 'documentary-18-v1');
     assert.equal((await upload()).status, 503);
   } finally { release?.(); mode = 'ok'; }
   assert.equal((await pending).status, 201);

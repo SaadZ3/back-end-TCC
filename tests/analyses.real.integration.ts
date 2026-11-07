@@ -98,7 +98,7 @@ test('modelo real: perfil → inferência → banco → recarga, reanálise e pa
   const response = await fetch(base+'/api/analyses',{method:'POST',headers,body:form('full_document',true)});
   const body = await response.json();
   assert.equal(response.status,201,JSON.stringify(body));
-  assert.equal(body.schema_version,2); assert.equal(body.supersedes_analysis_id,previousId);
+  assert.equal(body.schema_version,3); assert.equal(body.supersedes_analysis_id,previousId);
   const saved = await (await fetch(base+'/api/analyses/'+body.analysis_id,{headers})).json();
   assert.deepEqual(saved,body);
   assert.deepEqual((await prisma.policyAnalysis.findUniqueOrThrow({where:{id:body.analysis_id}})).result,body.result);
@@ -126,4 +126,30 @@ test('modelo real: perfil → inferência → banco → recarga, reanálise e pa
   if(output) for(const [name,value] of Object.entries({analysis:body,partial,conflict,manifest,summary}))
     await writeFile(path.join(output,name+'.json'),JSON.stringify(value,null,2));
   console.log(JSON.stringify(summary));
+});
+
+test('R11 modelo real respeita uma, duas e três categorias e preserva reanálise',async()=>{
+  const content=await readFile(path.join(__dirname,'fixtures/r11/policy.txt'));
+  const headers={Origin:origin,Cookie:cookie};
+  const prior=await prisma.policyAnalysis.findUniqueOrThrow({where:{id:previousId}});
+  const results=[];
+  for(const [ids,expected] of [[['security'],3],[['retention','security'],1.875],[['access','retention','security'],1.25]] as const) {
+    const selection={mode:'selected_categories',category_ids:ids};
+    const form=()=>{
+      const data=new FormData();data.append('file',new Blob([new Uint8Array(content)]),'r11.txt');
+      data.append('language','pt');data.append('document_scope','full_document');data.append('assessment_scope',JSON.stringify(selection));return data;
+    };
+    const data=form();data.append('supersedes_analysis_id',previousId);
+    const response=await fetch(base+'/api/analyses',{method:'POST',headers,body:data});const body=await response.json();
+    assert.equal(response.status,201,JSON.stringify(body));assert.equal(body.schema_version,3);
+    assert.equal(body.result.evaluation.score,expected);assert.deepEqual(body.assessment_scope,selection);
+    assert.deepEqual(await (await fetch(base+'/api/analyses/'+body.analysis_id,{headers})).json(),body);
+    const direct=await (await fetch(inference+'/analyze',{method:'POST',body:form()})).json();
+    assert.deepEqual(direct.result,body.result);
+    const record=await prisma.policyAnalysis.findUniqueOrThrow({where:{id:body.analysis_id}});
+    assert.deepEqual(record.assessment_scope,selection);
+    results.push(body);
+  }
+  assert.deepEqual(await prisma.policyAnalysis.findUniqueOrThrow({where:{id:previousId}}),prior);
+  if(output)await writeFile(path.join(output,'selected-categories.json'),JSON.stringify(results,null,2));
 });

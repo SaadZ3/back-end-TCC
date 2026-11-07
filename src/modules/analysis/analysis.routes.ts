@@ -39,7 +39,7 @@ const pagination = z.strictObject({
 /** Recebe a paginação e retorna somente análises da pessoa autenticada. */
 router.get('/', async (req, res) => {
   const { page, page_size } = pagination.parse(req.query);
-  const where = { user_id: req.userId!, result_schema_version: 2 };
+  const where = { user_id: req.userId!, result_schema_version: { in: [2, 3] } };
   const [rows, total] = await prisma.$transaction([
     prisma.policyAnalysis.findMany({
       where,
@@ -52,6 +52,8 @@ router.get('/', async (req, res) => {
         created_at: true,
         status: true,
         result_schema_version: true,
+        assessment_scope: true,
+        profile_id: true,
         supersedes_analysis_id: true
       }
     }),
@@ -64,6 +66,8 @@ router.get('/', async (req, res) => {
       created_at: row.created_at.toISOString(),
       status: row.status,
       schema_version: row.result_schema_version,
+      profile_id: row.profile_id,
+      ...(row.result_schema_version === 3 ? {assessment_scope: row.assessment_scope} : {}),
       supersedes_analysis_id: row.supersedes_analysis_id
     })),
     page,

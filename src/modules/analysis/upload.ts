@@ -51,7 +51,7 @@ export function receiveUpload(req: Request, res: Response): Promise<void> {
       if (failure instanceof multer.MulterError) {
         const large = failure.code === 'LIMIT_FILE_SIZE';
         finish(new AnalysisError(large ? 'FILE_TOO_LARGE' : 'INVALID_INPUT',
-          large ? 'Arquivo acima do limite permitido.' : 'Envie somente um arquivo e os campos language e document_scope.', large ? 413 : 400));
+          large ? 'Arquivo acima do limite permitido.' : 'Envie somente um arquivo e os campos de conteúdo, idioma e categorias a avaliar.', large ? 413 : 400));
       } else if (failure) finish(new AnalysisError('INVALID_INPUT', 'Envio multipart inválido.', 400));
       else finish();
     });

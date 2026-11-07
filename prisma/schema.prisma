@@ -197,6 +197,7 @@ model PolicyAnalysis {
   document_scope    String
   result_schema_version Int @default(2)
   profile_id        String? @default("documentary-18-v1")
+  assessment_scope  Json?
   supersedes_analysis_id String?
   supersedes        PolicyAnalysis? @relation("AnalysisRevisions", fields: [supersedes_analysis_id], references: [id], onDelete: SetNull)
   revisions         PolicyAnalysis[] @relation("AnalysisRevisions")

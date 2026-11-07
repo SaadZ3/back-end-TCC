@@ -1,0 +1,704 @@
+{
+  "schema_version": 3,
+  "versions": {
+    "model": "synthetic-labels-not-model-inference",
+    "preprocessing": "synthetic-fixture",
+    "scoring": "governance-rules-v5-dev1:cd0ad6a7b23c6b8ac86f5f17d36fe3c67610dc281c90a9be33f43e3065d51d8e",
+    "recommendations": "governance-recommendations-v5-dev1:80ff9202da7640d821cda532a496b912021e1035cee2976b0ab82e6bddf022ca"
+  },
+  "result": {
+    "document_scope": "full_document",
+    "source": {
+      "filename": "exemplo-r11.txt",
+      "format": "txt",
+      "byte_size": 231,
+      "sha256": "be3726f5a6cc8acdddfa1ad346792fcadc5df678b01433fbf133f9378a7d3d6a"
+    },
+    "preprocessing": {
+      "version": "synthetic-fixture-not-inference",
+      "max_length": 512,
+      "tokenizer_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "extraction": {
+      "status": "ok",
+      "warnings": [],
+      "text": "Coletamos nome. Não coletamos nome.\n\nUsamos TLS para proteger os dados pessoais durante a transmissão.\n\nFuncionários acessam os registros de clientes somente após autenticação de múltiplos fatores.\n\nGuardamos dados pessoais.",
+      "page_count": null,
+      "pages": [
+        {
+          "page_number": null,
+          "char_start": 0,
+          "char_end": 224,
+          "status": "ok"
+        }
+      ]
+    },
+    "segments": [
+      {
+        "segment_id": "s0",
+        "text": "Coletamos nome. Não coletamos nome.\n\nUsamos TLS para proteger os dados pessoais durante a transmissão.\n\nFuncionários acessam os registros de clientes somente após autenticação de múltiplos fatores.\n\nGuardamos dados pessoais.",
+        "char_start": 0,
+        "char_end": 224,
+        "page_start": null,
+        "page_end": null,
+        "labels": [
+          "Other"
+        ],
+        "n_tokens": 90,
+        "probabilities": {
+          "First Party Collection/Use": 0.01,
+          "Third Party Sharing/Collection": 0.01,
+          "User Choice/Control": 0.01,
+          "User Access, Edit and Deletion": 0.01,
+          "Data Retention": 0.01,
+          "Data Security": 0.01,
+          "Policy Change": 0.01,
+          "Do Not Track": 0.01,
+          "International and Specific Audiences": 0.01,
+          "Other": 0.99
+        },
+        "truncated": false
+      }
+    ],
+    "evaluation": {
+      "schema_version": 3,
+      "assessment_scope": {
+        "mode": "selected_categories",
+        "category_ids": [
+          "collection",
+          "security"
+        ]
+      },
+      "policy_id": "be3726f5a6cc8acdddfa1ad346792fcadc5df678b01433fbf133f9378a7d3d6a",
+      "language": "pt",
+      "uncertainty_policy": "exclude_inconclusive_evidence_v1",
+      "index": "documentary_information_quality",
+      "method_version": "documentary-quality-v5-draft1",
+      "score_scale": "continuous_0_3",
+      "profile_id": "documentary-18-v1",
+      "profile_sha256": "74da7425a640448efc374fdde09c7dc2b78660e5fd3fd116af976ddda847485e",
+      "validation_status": "not_human_validated",
+      "input_status": "complete_input",
+      "score_status": "available",
+      "score": 3.0,
+      "score_blockers": [],
+      "rules_version": "governance-rules-v5-dev1",
+      "rules_sha256": "291c6186cc703a73f20ca49920dd7f4a14b1da928f182a6ec79e700a470c97ee",
+      "predictions_sha256": "004b0c01b389fc608e8191da240849ed2a1d1f2aa2b10272278142c2d6b06fc2",
+      "fallback_enabled": true,
+      "dimensions": [
+        {
+          "id": "collection",
+          "title": "Coleta e uso",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "unresolved",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 2,
+          "excluded_questions": 2,
+          "questions": [
+            {
+              "id": "collection.data_types",
+              "dimension_id": "collection",
+              "title": "Tipos de dados coletados ou usados",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "documentary-18-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-11-05T00:00:00Z"
+              },
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "collection_practice",
+                "identifiable_data_type"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 15,
+                      "quote": "Coletamos nome."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.data_types",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:2e6f9230e9d0d2b9b3b48b48ba28b1db17edb26bd6cd9b65fd06aa99f91f5970"
+                },
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 16,
+                      "end": 35,
+                      "quote": "Não coletamos nome."
+                    }
+                  ],
+                  "polarity": "negated",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.data_types",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:c1517e962f5b5de73cde9f17878c9c8e04e22575e0078a6a7fd813ff89523851"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:409554f9a6d37417a496333ea5a6b4f9860a090fe8daa7d30f613bdb15862eb3"
+              ]
+            },
+            {
+              "id": "collection.purposes",
+              "dimension_id": "collection",
+              "title": "Relação entre dado e finalidade",
+              "status": "inconclusive",
+              "value": null,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "documentary-18-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-11-05T00:00:00Z"
+              },
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Contexto ou declarações potencialmente incompatíveis impedem decidir.",
+              "found_elements": [],
+              "missing_elements": [
+                "collected_data_type",
+                "specific_purpose"
+              ],
+              "supporting_groups": [],
+              "contextual_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 0,
+                      "end": 15,
+                      "quote": "Coletamos nome."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.purposes",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Informação pertinente; faltam: specific_purpose",
+                  "id": "evidence:c0f7ab762c2718ed55fcc4f08668960bde9e2c50934f831f4e48ad7ccb350e42"
+                },
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 16,
+                      "end": 35,
+                      "quote": "Não coletamos nome."
+                    }
+                  ],
+                  "polarity": "negated",
+                  "detection_source": "rule_only",
+                  "rule_id": "collection.purposes",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Informação pertinente; faltam: specific_purpose",
+                  "id": "evidence:a9638e6d4aea0b159bd675dd22ee134c74d5eb35c93a3f4f246541afb8ed6b4f"
+                }
+              ],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": [
+                "finding:3367091ce36e84fe33b98accd9971a2e6142a88db1c7cee67bd648f7ed111916"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sharing",
+          "title": "Compartilhamento",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "choice",
+          "title": "Escolhas e controle",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "access",
+          "title": "Direitos e solicitações",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "retention",
+          "title": "Retenção",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "security",
+          "title": "Segurança",
+          "weight": 1,
+          "normalized_weight": 1.0,
+          "status": "resolved",
+          "score": 3.0,
+          "contribution": 3.0,
+          "earned_points": 2.0,
+          "applicable_questions": 2,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 2,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": [
+            {
+              "id": "security.technical_measures",
+              "dimension_id": "security",
+              "title": "Medida técnica e contexto de proteção",
+              "status": "supported",
+              "value": 1.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "documentary-18-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-11-05T00:00:00Z"
+              },
+              "rule_id": "security.technical_measures",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Elementos exigidos encontrados em uma relação contextual.",
+              "found_elements": [
+                "data_or_protection_context",
+                "specific_measure"
+              ],
+              "missing_elements": [],
+              "supporting_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 37,
+                      "end": 102,
+                      "quote": "Usamos TLS para proteger os dados pessoais durante a transmissão."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "security.technical_measures",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:bcbc0813cc8e619d389e9037a651efb6affa66d01e917559a5d0398ee1ec0fd7"
+                }
+              ],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": []
+            },
+            {
+              "id": "security.access_controls",
+              "dimension_id": "security",
+              "title": "Controle de acesso, ator e recurso",
+              "status": "supported",
+              "value": 1.0,
+              "applicability": {
+                "state": "applicable",
+                "source": "profile",
+                "source_id": "documentary-18-v1",
+                "reason": "Pergunta documental central do perfil.",
+                "declared_at": "2026-11-05T00:00:00Z"
+              },
+              "rule_id": "security.access_controls",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Elementos exigidos encontrados em uma relação contextual.",
+              "found_elements": [
+                "actor",
+                "resource",
+                "specific_access_control"
+              ],
+              "missing_elements": [],
+              "supporting_groups": [
+                {
+                  "evidence": [
+                    {
+                      "segment_id": "s0",
+                      "start": 104,
+                      "end": 197,
+                      "quote": "Funcionários acessam os registros de clientes somente após autenticação de múltiplos fatores."
+                    }
+                  ],
+                  "polarity": "affirmed",
+                  "detection_source": "rule_only",
+                  "rule_id": "security.access_controls",
+                  "rule_version": "governance-rules-v5-dev1",
+                  "rationale": "Relação contextual detectada.",
+                  "id": "evidence:7721ecf5b0cae1f6ada3253147d6a5c15b6634af0bd2a612338ac9682642b9ba"
+                }
+              ],
+              "contextual_groups": [],
+              "duplicate_occurrences_omitted": 0,
+              "search_scope": {
+                "searched_segment_ids": [
+                  "s0"
+                ],
+                "excluded_segment_ids": [],
+                "category_pass": true,
+                "fallback_pass": true,
+                "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+              },
+              "finding_ids": []
+            }
+          ]
+        },
+        {
+          "id": "changes",
+          "title": "Alterações da política",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "dnt",
+          "title": "Não rastreamento — sinais DNT",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        },
+        {
+          "id": "audiences",
+          "title": "Públicos específicos e contexto internacional",
+          "weight": 1,
+          "normalized_weight": 0.0,
+          "status": "not_selected",
+          "score": null,
+          "contribution": null,
+          "earned_points": 0,
+          "applicable_questions": 0,
+          "unknown_applicability_questions": 0,
+          "resolved_questions": 0,
+          "inconclusive_questions": 0,
+          "excluded_questions": 0,
+          "questions": []
+        }
+      ],
+      "findings": [
+        {
+          "id": "finding:409554f9a6d37417a496333ea5a6b4f9860a090fe8daa7d30f613bdb15862eb3",
+          "dimension_id": "collection",
+          "question_id": "collection.data_types",
+          "rule_id": "collection.data_types",
+          "rule_version": "governance-rules-v5-dev1",
+          "kind": "contradiction",
+          "title": "Tipos de dados coletados ou usados",
+          "rationale": "Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "priority": "high",
+          "priority_reason": "Esclarecer declaração ou entrada impeditiva.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 15,
+                  "quote": "Coletamos nome."
+                }
+              ],
+              "polarity": "affirmed",
+              "detection_source": "rule_only",
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Relação contextual detectada.",
+              "id": "evidence:2e6f9230e9d0d2b9b3b48b48ba28b1db17edb26bd6cd9b65fd06aa99f91f5970"
+            },
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 16,
+                  "end": 35,
+                  "quote": "Não coletamos nome."
+                }
+              ],
+              "polarity": "negated",
+              "detection_source": "rule_only",
+              "rule_id": "collection.data_types",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Relação contextual detectada.",
+              "id": "evidence:c1517e962f5b5de73cde9f17878c9c8e04e22575e0078a6a7fd813ff89523851"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-98d4ae48b5ca76b356e3fa89"
+          ]
+        },
+        {
+          "id": "finding:3367091ce36e84fe33b98accd9971a2e6142a88db1c7cee67bd648f7ed111916",
+          "dimension_id": "collection",
+          "question_id": "collection.purposes",
+          "rule_id": "collection.purposes",
+          "rule_version": "governance-rules-v5-dev1",
+          "kind": "contradiction",
+          "title": "Relação entre dado e finalidade",
+          "rationale": "Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "priority": "high",
+          "priority_reason": "Esclarecer declaração ou entrada impeditiva.",
+          "evidence_groups": [
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 0,
+                  "end": 15,
+                  "quote": "Coletamos nome."
+                }
+              ],
+              "polarity": "affirmed",
+              "detection_source": "rule_only",
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Informação pertinente; faltam: specific_purpose",
+              "id": "evidence:c0f7ab762c2718ed55fcc4f08668960bde9e2c50934f831f4e48ad7ccb350e42"
+            },
+            {
+              "evidence": [
+                {
+                  "segment_id": "s0",
+                  "start": 16,
+                  "end": 35,
+                  "quote": "Não coletamos nome."
+                }
+              ],
+              "polarity": "negated",
+              "detection_source": "rule_only",
+              "rule_id": "collection.purposes",
+              "rule_version": "governance-rules-v5-dev1",
+              "rationale": "Informação pertinente; faltam: specific_purpose",
+              "id": "evidence:a9638e6d4aea0b159bd675dd22ee134c74d5eb35c93a3f4f246541afb8ed6b4f"
+            }
+          ],
+          "search_scope": {
+            "searched_segment_ids": [
+              "s0"
+            ],
+            "excluded_segment_ids": [],
+            "category_pass": true,
+            "fallback_pass": true,
+            "fallback_reason": "Busca complementar em segmentos sem a categoria prevista."
+          },
+          "recommendation_ids": [
+            "rec-84d95dbf4de2da9d21d6539f"
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-98d4ae48b5ca76b356e3fa89",
+          "template_id": "review.clarify.collection.data_types",
+          "catalog_version": "governance-recommendations-v5-dev1:80ff9202da7640d821cda532a496b912021e1035cee2976b0ab82e6bddf022ca",
+          "finding_ids": [
+            "finding:409554f9a6d37417a496333ea5a6b4f9860a090fe8daa7d30f613bdb15862eb3"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Tipos de dados coletados ou usados: Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Rubrica documental do projeto — R10",
+              "edition": "documentary-quality-v5-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R10_CRITERIOS_DOCUMENTAIS.md",
+              "source_sha256": "3ee8c14f782eefb2587c88da5f19b21ece4777bb10e9ac19544ce8ebb8bf9b5c",
+              "source_locator": "Perguntas e estados; limites de interpretação; cálculo e histórico",
+              "control_role": "project",
+              "summary": "Rubrica do projeto com 18 perguntas e exclusão de evidências inconclusivas; não equivale a requisitos ISO ou certificação."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "high",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Esclarecer declaração ou entrada impeditiva.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        },
+        {
+          "id": "rec-84d95dbf4de2da9d21d6539f",
+          "template_id": "review.clarify.collection.purposes",
+          "catalog_version": "governance-recommendations-v5-dev1:80ff9202da7640d821cda532a496b912021e1035cee2976b0ab82e6bddf022ca",
+          "finding_ids": [
+            "finding:3367091ce36e84fe33b98accd9971a2e6142a88db1c7cee67bd648f7ed111916"
+          ],
+          "target": "organizational_verification",
+          "trigger_reason": "Revisão sugerida pelos achados: Relação entre dado e finalidade: Declarações potencialmente incompatíveis sobre objeto/contexto comparáveis.",
+          "what_to_do": "Esclarecer a ambiguidade ou as declarações potencialmente incompatíveis.",
+          "how_to_do": [
+            "Compare as passagens com o documento completo, identificando sujeitos, dados, condições e exceções.",
+            "Consulte o responsável para confirmar a prática e registre a conclusão; corrija o texto somente depois dessa confirmação."
+          ],
+          "completion_evidence": [
+            "Registro de esclarecimento com responsável e evidências",
+            "Versão revisada ou justificativa para manter o texto"
+          ],
+          "suggested_role": "Revisor e responsável pelo documento",
+          "references": [
+            {
+              "id": "project-review",
+              "source_type": "project_rubric",
+              "title": "Rubrica documental do projeto — R10",
+              "edition": "documentary-quality-v5-draft1",
+              "section": "Regra solicitada; identificação e histórico; limites acadêmicos",
+              "pdf_page": null,
+              "url": null,
+              "verified_by": "Codex — conferência da rubrica local",
+              "verified_at": "2026-11-05",
+              "verification_scope": "project_document",
+              "source_file": "docs/R10_CRITERIOS_DOCUMENTAIS.md",
+              "source_sha256": "3ee8c14f782eefb2587c88da5f19b21ece4777bb10e9ac19544ce8ebb8bf9b5c",
+              "source_locator": "Perguntas e estados; limites de interpretação; cálculo e histórico",
+              "control_role": "project",
+              "summary": "Rubrica do projeto com 18 perguntas e exclusão de evidências inconclusivas; não equivale a requisitos ISO ou certificação."
+            }
+          ],
+          "pending_fields": [
+            "Escopo das passagens",
+            "Responsável pelo esclarecimento"
+          ],
+          "priority": "high",
+          "priority_reason": "Ordem sugerida herdada dos achados vinculados: Esclarecer declaração ou entrada impeditiva.",
+          "applicability_note": "Confirme o contexto e a pertinência antes de aplicar. Associação temática para revisão; não é equivalência entre OPP-115, ISO e LGPD."
+        }
+      ],
+      "limitations": [
+        "Avaliação documental experimental; não mede conformidade, proteção efetiva ou maturidade.",
+        "Heurísticas lexicais contextuais, sem compreensão semântica geral; revisão humana necessária.",
+        "Satisfação de uma pergunta indica ao menos uma relação encontrada, não um inventário exaustivo.",
+        "Conflitos reconhecidos são candidatos; variações de sujeito, escopo e exceções podem escapar.",
+        "Sem texto extraído e offsets, relações entre segmentos não são reconstruídas.",
+        "Recomendações de desenvolvimento: guias da planilha conferidos, sem conferência do texto integral da ISO e sem revisão técnica humana independente. Não comprovam atendimento aos controles."
+      ]
+    }
+  }
+}

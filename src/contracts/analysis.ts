@@ -1,5 +1,6 @@
 /** Valida a resposta da inferência, incluindo notas, evidências e vínculos. */
 import { z } from 'zod';
+import { assessmentScopeSchema, assessmentScopeUploadSchema } from './assessmentScope.js';
 import { classifyPercentage } from '../utils/scoreScale.js';
 import { metadataSchema, resultFields, apiErrorSchema, evidenceSchema, baseVersionsSchema } from './analysis.shared.js';
 export { errorResponseSchema } from './analysis.shared.js';
@@ -56,6 +57,7 @@ const historicalQuestionIds = ['collection.data_types', 'collection.purposes', '
 
 export const analysisMetadataSchema = metadataSchema.extend({
   supersedes_analysis_id: z.uuid().optional(),
+  assessment_scope: assessmentScopeUploadSchema.optional(),
 });
 const group = z.strictObject({
   id,
@@ -102,7 +104,7 @@ const dimension = z.strictObject({
   title: id,
   weight: z.number().positive(),
   normalized_weight: fraction.nullable(),
-  status: z.enum(['resolved', 'unresolved', 'not_applicable']),
+  status: z.enum(['resolved', 'unresolved', 'not_applicable', 'not_selected']),
   score: score.nullable(),
   contribution: contribution.nullable(),
   earned_points: z.number().nonnegative(),
@@ -137,13 +139,14 @@ const profileSchema = z.enum(['core-14-v1', 'documentary-18-v1']);
 export const evaluationSchema = z.strictObject({
   score_scale: z.enum(['ordinal_0_3', 'continuous_0_3']),
   score_conversion: z.literal('percentage_to_ordinal_v1').optional(),
-  schema_version: z.literal(2),
+  schema_version: z.union([z.literal(2), z.literal(3)]),
   policy_id: id,
   language: z.literal('pt'),
   index: z.literal('documentary_information_quality'),
   method_version: id,
   uncertainty_policy: z.literal('exclude_inconclusive_evidence_v1').optional(),
   profile_id: profileSchema,
+  assessment_scope: assessmentScopeSchema.optional(),
   profile_sha256: hash,
   validation_status: z.literal('not_human_validated'),
   input_status: z.enum(['complete_input', 'partial_input', 'no_usable_segments']),
@@ -183,7 +186,11 @@ export const analysisResultSchema = z.strictObject({
   const fail = (message: string) => ctx.addIssue({ code: 'custom', message });
   const sameNumber = (a: number | null, b: number | null) => a === null || b === null ? a === b : Math.abs(a - b) < 1e-8;
   const evaluation = result.evaluation;
-  const questionIds = profileQuestions[evaluation.profile_id];
+  const allQuestionIds = profileQuestions[evaluation.profile_id];
+  const selection = evaluation.assessment_scope;
+  if ((evaluation.schema_version === 3) !== !!selection || (selection && evaluation.profile_id !== 'documentary-18-v1'))
+    fail('Seleção incompatível com a versão do resultado.');
+  const questionIds = selection ? allQuestionIds.filter(q => selection.category_ids.some(id => q.startsWith(id + '.'))) : allQuestionIds;
   if ((evaluation.profile_id === 'documentary-18-v1') !== (evaluation.method_version === 'documentary-quality-v5-draft1'))
     fail('Método incompatível com o perfil.');
   const excludeUncertain = ['documentary-quality-v4-draft1', 'documentary-quality-v5-draft1'].includes(evaluation.method_version);
@@ -196,7 +203,7 @@ export const analysisResultSchema = z.strictObject({
     fail('Offsets globais inexatos.');
   const questions = evaluation.dimensions.flatMap(d => d.questions);
   if (questions.length !== questionIds.length || new Set(questions.map(q => q.id)).size !== questionIds.length || questions.some(q => !questionIds.includes(q.id))) fail('Perfil central incompleto.');
-  const expectedDimensions = [...new Set(questionIds.map(q => q.split('.')[0]))];
+  const expectedDimensions = [...new Set(allQuestionIds.map(q => q.split('.')[0]))];
   if (evaluation.dimensions.length !== expectedDimensions.length || new Set(evaluation.dimensions.map(d => d.id)).size !== expectedDimensions.length || evaluation.dimensions.some(d => !expectedDimensions.includes(d.id))) fail('Dimensões inválidas.');
   const blockers: string[] = [];
   if (result.document_scope !== 'full_document') blockers.push('document_scope_incomplete');
@@ -220,6 +227,13 @@ export const analysisResultSchema = z.strictObject({
     const active = (d: z.infer<typeof dimension>) => usableSegmentCount > 0 && d.questions.some(q => q.value !== null);
     const weights = evaluation.dimensions.reduce((sum, d) => sum + (!excludeUncertain || active(d) ? d.weight : 0), 0);
     for (const d of evaluation.dimensions) {
+      if (selection && !selection.category_ids.some(id => id === d.id)) {
+        if (d.status !== 'not_selected' || d.questions.length || d.score !== null || d.contribution !== null ||
+          d.normalized_weight !== 0 || d.earned_points !== 0 || d.applicable_questions !== 0 || d.resolved_questions !== 0 ||
+          d.inconclusive_questions !== 0 || d.excluded_questions !== 0 || d.unknown_applicability_questions !== 0)
+          fail('Categoria não selecionada não pode conter avaliação ou pontuação.');
+        continue;
+      }
       if (d.questions.length !== 2 || d.questions.some(q => q.dimension_id !== d.id || !q.id.startsWith(d.id + '.'))) fail('Perguntas em dimensão incorreta.');
       const resolved = d.questions.filter(q => q.value !== null).length;
       const points = d.questions.reduce((sum, q) => sum + (q.value ?? 0), 0);
@@ -275,6 +289,7 @@ export const analysisResultSchema = z.strictObject({
       for (const g of [...q.supporting_groups, ...q.contextual_groups]) checkGroup(g);
     }
     for (const f of evaluation.findings) {
+      if (selection && f.dimension_id !== null && !selection.category_ids.some(id => id === f.dimension_id)) fail('Achado fora das categorias selecionadas.');
       if (f.question_id !== null && !questions.some(q => q.id === f.question_id && q.finding_ids.includes(f.id))) fail('Achado sem pergunta correspondente.');
       f.evidence_groups.forEach(checkGroup);
       if (f.search_scope) checkScope(f.search_scope);
@@ -307,18 +322,21 @@ export const analysisResultSchema = z.strictObject({
 });
 
 /** Recebe resultado e contexto de validação e registra divergências da versão do catálogo. */
-function checkCatalog(value: { versions: z.infer<typeof versionsSchema>; result: z.infer<typeof analysisResultSchema> ;}, ctx: z.RefinementCtx) {
+function checkCatalog(value: { schema_version?: number; versions: z.infer<typeof versionsSchema>; result: z.infer<typeof analysisResultSchema> ;}, ctx: z.RefinementCtx) {
+  if (value.schema_version !== undefined && value.schema_version !== value.result.evaluation.schema_version)
+    ctx.addIssue({code:'custom',message:'Versões do resultado e da avaliação divergem.'});
   if (value.result.evaluation.recommendations.some(r => r.catalog_version !== value.versions.recommendations))
     ctx.addIssue({ code: 'custom', message: 'Versão do catálogo divergente ou ausente.' });
 }
-export const inferenceResponseSchema = z.strictObject({ schema_version: z.literal(2), versions: versionsSchema, result: analysisResultSchema }).superRefine(checkCatalog);
+export const inferenceResponseSchema = z.strictObject({ schema_version: z.union([z.literal(2), z.literal(3)]), versions: versionsSchema, result: analysisResultSchema }).superRefine(checkCatalog);
 const common = {
-  schema_version: z.literal(2),
+  schema_version: z.union([z.literal(2), z.literal(3)]),
   analysis_id: z.uuid(),
   created_at: z.iso.datetime(),
   original_filename: id,
   supersedes_analysis_id: z.uuid().nullable(),
-  profile_id: profileSchema
+  profile_id: profileSchema,
+  assessment_scope: assessmentScopeSchema.optional()
 };
 export const analysisResponseSchema = z.discriminatedUnion('status', [
   z.strictObject({
@@ -342,7 +360,11 @@ export const analysisResponseSchema = z.discriminatedUnion('status', [
     result: z.null(),
     error: apiErrorSchema
   }),
-]).superRefine((value, ctx) => { if (value.status === 'completed') {
+]).superRefine((value, ctx) => {
+  if ((value.schema_version === 3) !== !!value.assessment_scope) ctx.addIssue({code:'custom',message:'Seleção obrigatória na versão 3.'});
+  if (value.schema_version === 3 && value.profile_id !== 'documentary-18-v1') ctx.addIssue({code:'custom',message:'Perfil incompatível com a seleção.'});
+  if (value.status === 'completed') {
+  if (JSON.stringify(value.assessment_scope) !== JSON.stringify(value.result.evaluation.assessment_scope)) ctx.addIssue({code:'custom',message:'Seleção salva diverge da avaliação.'});
   checkCatalog(value, ctx);
   if (value.profile_id !== value.result.evaluation.profile_id)
     ctx.addIssue({ code: 'custom', message: 'Perfil salvo diverge do perfil da avaliação.' });

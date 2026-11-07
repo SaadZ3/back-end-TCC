@@ -1,4 +1,5 @@
 /** Coordena arquivos privados, inferência e persistência dos estados da análise. */
+import { resolveAssessmentScope } from '../../contracts/assessmentScope.js';
 import { randomUUID, createHash } from 'node:crypto';
 import { mkdir, writeFile, unlink } from 'node:fs/promises';
 import path from 'node:path';
@@ -14,7 +15,8 @@ import { normalizeStoredResult } from '../../utils/scoreScale.js';
 export function serialize(row: PolicyAnalysis) {
   const result = normalizeStoredResult(row.result);
   return analysisResponseSchema.parse({
-    schema_version: 2,
+    schema_version: row.result_schema_version,
+    ...(row.result_schema_version === 3 ? {assessment_scope: row.assessment_scope} : {}),
     analysis_id: row.id,
     created_at: row.created_at.toISOString(),
     original_filename: row.original_filename,
@@ -32,7 +34,7 @@ export function serialize(row: PolicyAnalysis) {
 export async function recoverInterruptedAnalyses() {
   // Protótipo com uma instância Node. Executar antes de começar a aceitar requisições.
   return prisma.policyAnalysis.updateMany({
-    where: { status: 'processing', result_schema_version: 2 },
+    where: { status: 'processing', result_schema_version: { in: [2, 3] } },
     data: {
       status: 'failed',
       completed_at: new Date(),
@@ -48,7 +50,7 @@ export async function recoverInterruptedAnalyses() {
 
 /** Recebe IDs da análise e da pessoa; retorna o registro próprio ou lança erro 404. */
 export async function ownedAnalysis(id: string, userId: string) {
-  const row = await prisma.policyAnalysis.findFirst({ where: { id, user_id: userId, result_schema_version: 2 } });
+  const row = await prisma.policyAnalysis.findFirst({ where: { id, user_id: userId, result_schema_version: { in: [2, 3] } } });
   if (!row) throw new AnalysisError('NOT_FOUND', 'Análise não encontrada.', 404);
   return row;
 }
@@ -66,7 +68,7 @@ export async function deleteAnalysis(id: string, userId: string) {
     throw new AnalysisError('ANALYSIS_PROCESSING', 'Aguarde o processamento terminar antes de excluir a análise.', 409);
   const location = privateFilePath(row.storage_key);
   const deleted = await prisma.policyAnalysis.deleteMany({
-    where: { id, user_id: userId, result_schema_version: 2, status: { not: 'processing' } },
+    where: { id, user_id: userId, result_schema_version: { in: [2, 3] }, status: { not: 'processing' } },
   });
   if (!deleted.count) throw new AnalysisError('NOT_FOUND', 'Análise não encontrada.', 404);
   // O registro é removido primeiro para que uma falha de disco nunca mantenha o arquivo acessível pela API.
@@ -94,6 +96,7 @@ async function savePrivateFile(key: string, content: Buffer): Promise<string> {
 export async function createAnalysis(userId: string, body: unknown, file?: Express.Multer.File) {
   const metadata = analysisMetadataSchema.parse(body);
   const profile = 'documentary-18-v1';
+  const selection = resolveAssessmentScope(metadata.assessment_scope);
   const previous = metadata.supersedes_analysis_id ?? null;
   if (previous) await ownedAnalysis(previous, userId);
   if (!file || file.size === 0) throw new AnalysisError('UNREADABLE_FILE', 'Envie um arquivo não vazio.', 422);
@@ -116,7 +119,8 @@ export async function createAnalysis(userId: string, body: unknown, file?: Expre
         byte_size: file.size,
         document_scope: metadata.document_scope,
         language: metadata.language,
-        result_schema_version: 2,
+        result_schema_version: 3,
+        assessment_scope: selection as Prisma.InputJsonValue,
         profile_id: profile,
         supersedes_analysis_id: previous,
       }
@@ -126,7 +130,7 @@ export async function createAnalysis(userId: string, body: unknown, file?: Expre
     throw error;
   }
   try {
-    const response = await infer(file, metadata.document_scope);
+    const response = await infer(file, metadata.document_scope, selection);
     const updated = await prisma.policyAnalysis.updateMany({
       where: { id, status: 'processing' },
       data: {
