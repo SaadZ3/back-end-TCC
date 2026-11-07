@@ -50,7 +50,7 @@ const recommendation = z.strictObject({
   applicability_note: id,
 });
 const states = ['supported', 'partial', 'not_detected', 'inconclusive', 'not_applicable'] as const;
-const questionIds = ['collection.data_types', 'collection.purposes', 'sharing.recipients', 'sharing.conditions',
+const historicalQuestionIds = ['collection.data_types', 'collection.purposes', 'sharing.recipients', 'sharing.conditions',
   'choice.mechanism', 'choice.channel', 'access.channel', 'access.response_time', 'retention.duration',
   'retention.disposal', 'security.technical_measures', 'security.access_controls', 'changes.notice_channel', 'changes.notice_timing'];
 
@@ -128,6 +128,12 @@ const finding = z.strictObject({
   search_scope: search.nullable(),
   recommendation_ids: z.array(id),
 });
+const profileQuestions: Record<string, string[]> = {
+  'core-14-v1': historicalQuestionIds,
+  'documentary-18-v1': [...historicalQuestionIds, 'dnt.response', 'dnt.effect', 'audiences.scope', 'audiences.practice'],
+};
+const profileSchema = z.enum(['core-14-v1', 'documentary-18-v1']);
+
 export const evaluationSchema = z.strictObject({
   score_scale: z.enum(['ordinal_0_3', 'continuous_0_3']),
   score_conversion: z.literal('percentage_to_ordinal_v1').optional(),
@@ -137,7 +143,7 @@ export const evaluationSchema = z.strictObject({
   index: z.literal('documentary_information_quality'),
   method_version: id,
   uncertainty_policy: z.literal('exclude_inconclusive_evidence_v1').optional(),
-  profile_id: z.literal('core-14-v1'),
+  profile_id: profileSchema,
   profile_sha256: hash,
   validation_status: z.literal('not_human_validated'),
   input_status: z.enum(['complete_input', 'partial_input', 'no_usable_segments']),
@@ -149,7 +155,7 @@ export const evaluationSchema = z.strictObject({
   rules_sha256: hash,
   predictions_sha256: hash,
   fallback_enabled: z.boolean(),
-  dimensions: z.array(dimension).length(7),
+  dimensions: z.array(dimension).min(7).max(9),
   findings: z.array(finding),
   recommendations: z.array(recommendation),
   limitations: z.array(z.string()),
@@ -177,7 +183,10 @@ export const analysisResultSchema = z.strictObject({
   const fail = (message: string) => ctx.addIssue({ code: 'custom', message });
   const sameNumber = (a: number | null, b: number | null) => a === null || b === null ? a === b : Math.abs(a - b) < 1e-8;
   const evaluation = result.evaluation;
-  const excludeUncertain = evaluation.method_version === 'documentary-quality-v4-draft1';
+  const questionIds = profileQuestions[evaluation.profile_id];
+  if ((evaluation.profile_id === 'documentary-18-v1') !== (evaluation.method_version === 'documentary-quality-v5-draft1'))
+    fail('Método incompatível com o perfil.');
+  const excludeUncertain = ['documentary-quality-v4-draft1', 'documentary-quality-v5-draft1'].includes(evaluation.method_version);
   if (excludeUncertain !== (evaluation.uncertainty_policy === 'exclude_inconclusive_evidence_v1') ||
     (excludeUncertain && evaluation.score_scale !== 'continuous_0_3')) fail('Política de incerteza incompatível com o método.');
   const segments = new Map(result.segments.map(s => [s.segment_id, s]));
@@ -186,9 +195,9 @@ export const analysisResultSchema = z.strictObject({
   for (const s of result.segments) if (s.char_end <= s.char_start || s.char_end > extractedCharacters.length || extractedCharacters.slice(s.char_start, s.char_end).join('') !== s.text)
     fail('Offsets globais inexatos.');
   const questions = evaluation.dimensions.flatMap(d => d.questions);
-  if (questions.length !== 14 || new Set(questions.map(q => q.id)).size !== 14 || questions.some(q => !questionIds.includes(q.id))) fail('Perfil central incompleto.');
+  if (questions.length !== questionIds.length || new Set(questions.map(q => q.id)).size !== questionIds.length || questions.some(q => !questionIds.includes(q.id))) fail('Perfil central incompleto.');
   const expectedDimensions = [...new Set(questionIds.map(q => q.split('.')[0]))];
-  if (new Set(evaluation.dimensions.map(d => d.id)).size !== 7 || evaluation.dimensions.some(d => !expectedDimensions.includes(d.id))) fail('Dimensões inválidas.');
+  if (evaluation.dimensions.length !== expectedDimensions.length || new Set(evaluation.dimensions.map(d => d.id)).size !== expectedDimensions.length || evaluation.dimensions.some(d => !expectedDimensions.includes(d.id))) fail('Dimensões inválidas.');
   const blockers: string[] = [];
   if (result.document_scope !== 'full_document') blockers.push('document_scope_incomplete');
   if (result.extraction.status !== 'ok') blockers.push('extraction_partial');
@@ -235,7 +244,7 @@ export const analysisResultSchema = z.strictObject({
   };
   const checkGroup = (g: z.infer<typeof group>) => {
     const labels = ['First Party Collection/Use', 'Third Party Sharing/Collection', 'User Choice/Control',
-      'User Access, Edit and Deletion', 'Data Retention', 'Data Security', 'Policy Change'];
+      'User Access, Edit and Deletion', 'Data Retention', 'Data Security', 'Policy Change', 'Do Not Track', 'International and Specific Audiences'];
     const label = labels[expectedDimensions.indexOf(g.rule_id.split('.')[0])];
     if (!questionIds.includes(g.rule_id) || g.rule_version !== evaluation.rules_version) fail('Regra da evidência divergente.');
     const classified = g.evidence.some(ref => segments.get(ref.segment_id)?.labels.includes(label));
@@ -253,7 +262,7 @@ export const analysisResultSchema = z.strictObject({
         [...q.supporting_groups, ...q.contextual_groups].some(g => g.rule_id !== q.id)) fail('Regra da pergunta divergente.');
       const values = { supported: 1, partial: .5, not_detected: 0, inconclusive: null, not_applicable: null };
       if (q.value !== values[q.status] || q.applicability.state !== 'applicable' || q.applicability.source !== 'profile' ||
-        q.applicability.source_id !== evaluation.profile_id || q.status === 'not_applicable') fail('Estado/aplicabilidade incompatível com core-14-v1.');
+        q.applicability.source_id !== evaluation.profile_id || q.status === 'not_applicable') fail('Estado/aplicabilidade incompatível com o perfil.');
       if ((q.status === 'supported' && (q.missing_elements.length || !q.supporting_groups.length)) ||
         (q.status === 'partial' && (!q.missing_elements.length || !q.supporting_groups.length)) ||
         (q.status === 'not_detected' && q.supporting_groups.length)) fail('Suporte incompatível com estado.');
@@ -309,7 +318,7 @@ const common = {
   created_at: z.iso.datetime(),
   original_filename: id,
   supersedes_analysis_id: z.uuid().nullable(),
-  profile_id: z.literal('core-14-v1')
+  profile_id: profileSchema
 };
 export const analysisResponseSchema = z.discriminatedUnion('status', [
   z.strictObject({
@@ -333,4 +342,8 @@ export const analysisResponseSchema = z.discriminatedUnion('status', [
     result: z.null(),
     error: apiErrorSchema
   }),
-]).superRefine((value, ctx) => { if (value.status === 'completed') checkCatalog(value, ctx); });
+]).superRefine((value, ctx) => { if (value.status === 'completed') {
+  checkCatalog(value, ctx);
+  if (value.profile_id !== value.result.evaluation.profile_id)
+    ctx.addIssue({ code: 'custom', message: 'Perfil salvo diverge do perfil da avaliação.' });
+} });

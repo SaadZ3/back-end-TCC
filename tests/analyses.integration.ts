@@ -312,7 +312,7 @@ test('mantém parcial nulo, versão em falhas e processamento', async () => {
     const row = await prisma.policyAnalysis.findFirstOrThrow({ where: { user_id: ownerId, status:'processing' } });
     assert.equal((await fetch(base + '/api/analyses/' + row.id, { method: 'DELETE', headers: { Origin: origin, Cookie: cookie } })).status, 409);
     const saved = await (await get('/'+row.id, cookie)).json();
-    assert.equal(saved.schema_version, 2); assert.equal(saved.profile_id, 'core-14-v1');
+    assert.equal(saved.schema_version, 2); assert.equal(saved.profile_id, 'documentary-18-v1');
     assert.equal((await upload()).status, 503);
   } finally { release?.(); mode = 'ok'; }
   assert.equal((await pending).status, 201);

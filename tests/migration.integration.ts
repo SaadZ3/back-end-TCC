@@ -50,5 +50,14 @@ test('migrations preservam registros anteriores e adotam o método atual como pa
     await client.query('ROLLBACK TO SAVEPOINT duplicate_email');
     await client.query("DELETE FROM policy_analyses WHERE id = 'old'");
     assert.equal((await client.query("SELECT supersedes_analysis_id FROM policy_analyses WHERE id = 'new'")).rows[0].supersedes_analysis_id, null);
+    const historical = (await client.query('SELECT * FROM policy_analyses ORDER BY id')).rows;
+    await client.query(await readFile(path.join(__dirname, '../prisma/migrations/20261106000100_documentary_18_profile/migration.sql'), 'utf8'));
+    assert.deepEqual((await client.query('SELECT * FROM policy_analyses ORDER BY id')).rows, historical);
+    await client.query(`INSERT INTO policy_analyses (id,user_id,original_filename,storage_key,file_sha256,byte_size,document_scope,updated_at)
+      VALUES ('r10','owner','r10.txt','r10.txt','hash',4,'full_document',NOW())`);
+    assert.equal((await client.query("SELECT profile_id FROM policy_analyses WHERE id='r10'")).rows[0].profile_id, 'documentary-18-v1');
+    await client.query('SAVEPOINT unknown_profile');
+    await assert.rejects(client.query("UPDATE policy_analyses SET profile_id='unknown' WHERE id='r10'"));
+    await client.query('ROLLBACK TO SAVEPOINT unknown_profile');
   } finally { await client.query('ROLLBACK'); await client.end(); }
 });

@@ -196,7 +196,7 @@ model PolicyAnalysis {
   language          String @default("pt")
   document_scope    String
   result_schema_version Int @default(2)
-  profile_id        String? @default("core-14-v1")
+  profile_id        String? @default("documentary-18-v1")
   supersedes_analysis_id String?
   supersedes        PolicyAnalysis? @relation("AnalysisRevisions", fields: [supersedes_analysis_id], references: [id], onDelete: SetNull)
   revisions         PolicyAnalysis[] @relation("AnalysisRevisions")

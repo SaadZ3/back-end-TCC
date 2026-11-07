@@ -74,6 +74,9 @@ test('login → arquivo → modelo real Python → PostgreSQL → reabertura e a
   assert.deepEqual(await restored.json(), body);
   const record = await prisma.policyAnalysis.findUniqueOrThrow({ where: { id: body.analysis_id } });
   assert.deepEqual(record.result, body.result);
+  assert.equal(body.profile_id, 'documentary-18-v1');
+  assert.equal(record.profile_id, body.result.evaluation.profile_id);
+  assert.equal(body.result.evaluation.dimensions.length, 9);
   const download = await fetch(base + '/api/analyses/' + body.analysis_id + '/file', { headers: { Cookie: cookie } });
   assert.deepEqual(Buffer.from(await download.arrayBuffer()), buffer);
   console.log(JSON.stringify({ seconds: (performance.now() - started) / 1000,

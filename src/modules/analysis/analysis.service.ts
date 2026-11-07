@@ -93,7 +93,7 @@ async function savePrivateFile(key: string, content: Buffer): Promise<string> {
 /** Recebe pessoa, metadados e arquivo; persiste o processamento e retorna o resultado validado. */
 export async function createAnalysis(userId: string, body: unknown, file?: Express.Multer.File) {
   const metadata = analysisMetadataSchema.parse(body);
-  const profile = 'core-14-v1';
+  const profile = 'documentary-18-v1';
   const previous = metadata.supersedes_analysis_id ?? null;
   if (previous) await ownedAnalysis(previous, userId);
   if (!file || file.size === 0) throw new AnalysisError('UNREADABLE_FILE', 'Envie um arquivo não vazio.', 422);
@@ -131,6 +131,7 @@ export async function createAnalysis(userId: string, body: unknown, file?: Expre
       where: { id, status: 'processing' },
       data: {
         status: 'completed',
+        profile_id: response.result.evaluation.profile_id,
         completed_at: new Date(),
         versions: response.versions as Prisma.InputJsonValue,
         result: response.result as Prisma.InputJsonValue,
